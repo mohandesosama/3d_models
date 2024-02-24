@@ -97,8 +97,9 @@
         luminosityHighPassShader.uniforms['smoothWidth'].value = 0.01;
         composer.addPass(luminosityHighPassShader);
 
+        // Corrected initialization of HighPassShader
         const highPassShader = new THREE.ShaderPass(THREE.HighPassShader);
-        highPassShader.uniforms['blur'].value = 0.3;
+        highPassShader.uniforms['h'].value = 1;
         composer.addPass(highPassShader);
 
         const finalPass = new THREE.ShaderPass(THREE.ShaderExtras[ "SepiaShader" ]);
