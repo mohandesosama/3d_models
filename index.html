@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>3D Model Viewer with OrbitControls and Effects</title>
+    <title>3D Model Viewer with Enhanced Detail</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
         #model-container { width: 100%; height: 100vh; margin: 0; background-color: white; }
@@ -32,6 +32,8 @@
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/ShaderPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/FXAAShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/LuminosityHighPassShader.js"></script>
+
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -88,6 +90,19 @@
         const copyPass = new THREE.ShaderPass(THREE.CopyShader);
         copyPass.renderToScreen = true;
         composer.addPass(copyPass);
+
+        // Additional effect for enhancing details
+        const luminosityHighPassShader = new THREE.ShaderPass(THREE.LuminosityHighPassShader);
+        luminosityHighPassShader.uniforms['luminosityThreshold'].value = 0.5;
+        luminosityHighPassShader.uniforms['smoothWidth'].value = 0.01;
+        composer.addPass(luminosityHighPassShader);
+
+        const highPassShader = new THREE.ShaderPass(THREE.HighPassShader);
+        highPassShader.uniforms['blur'].value = 0.3;
+        composer.addPass(highPassShader);
+
+        const finalPass = new THREE.ShaderPass(THREE.ShaderExtras[ "SepiaShader" ]);
+        composer.addPass(finalPass);
 
         function animate() {
             requestAnimationFrame(animate);
