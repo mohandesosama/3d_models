@@ -91,20 +91,6 @@
         copyPass.renderToScreen = true;
         composer.addPass(copyPass);
 
-        // Additional effect for enhancing details
-        const luminosityHighPassShader = new THREE.ShaderPass(THREE.LuminosityHighPassShader);
-        luminosityHighPassShader.uniforms['luminosityThreshold'].value = 0.5;
-        luminosityHighPassShader.uniforms['smoothWidth'].value = 0.01;
-        composer.addPass(luminosityHighPassShader);
-
-        // Corrected initialization of HighPassShader
-        const highPassShader = new THREE.ShaderPass(THREE.HighPassShader);
-        highPassShader.uniforms['h'].value = 1;
-        composer.addPass(highPassShader);
-
-        const finalPass = new THREE.ShaderPass(THREE.ShaderExtras[ "SepiaShader" ]);
-        composer.addPass(finalPass);
-
         function animate() {
             requestAnimationFrame(animate);
             controls.update();
