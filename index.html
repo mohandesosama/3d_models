@@ -23,7 +23,7 @@
         <!-- Your website footer content here -->
     </footer>
 
- <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js"></script>
@@ -32,9 +32,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/ShaderPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/FXAAShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/LuminosityHighPassShader.js"></script>
 
-    
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -78,10 +76,10 @@
         composer.addPass(renderPass);
 
         const outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
-        outlinePass.edgeStrength = 4;
-        outlinePass.edgeThickness = 2;
-        outlinePass.visibleEdgeColor.set(0x00ff00);
-        outlinePass.hiddenEdgeColor.set(0xff0000);
+        outlinePass.edgeStrength = 10; // Increase edge strength for more visible outlines
+        outlinePass.edgeThickness = 3; // Increase edge thickness for more visible outlines
+        outlinePass.visibleEdgeColor.set(0xffffff); // Set visible edge color to white
+        outlinePass.hiddenEdgeColor.set(0xffffff); // Set hidden edge color to white
         composer.addPass(outlinePass);
 
         const effectFXAA = new THREE.ShaderPass(THREE.FXAAShader);
