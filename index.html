@@ -24,8 +24,8 @@
     </footer>
 
     <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
-        import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/loaders/OBJLoader.js';
+        import * as THREE from 'https://cdn.skypack.dev/three@latest';
+        import { OBJLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/OBJLoader.js';
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
@@ -34,7 +34,7 @@
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         const loader = new OBJLoader();
-        loader.load('./models/iPhone13.obj', function (object) {
+        loader.load('models/iPhone13.obj', function (object) {
             scene.add(object);
         });
 
