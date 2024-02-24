@@ -4,7 +4,7 @@
     <title>3D Model Viewer with OrbitControls</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
-        #model-container { width: 100%; height: 100vh; margin: 0; }
+        #model-container { width: 100%; height: 100vh; margin: 0; background-color: white; } /* Set background color to white */
     </style>
 </head>
 <body>
@@ -32,6 +32,7 @@
         const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(600, 400);
+        renderer.setClearColor(0xffffff); // Set background color to white
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         const loader = new THREE.OBJLoader();
