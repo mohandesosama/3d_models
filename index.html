@@ -29,25 +29,21 @@
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/EffectComposer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/RenderPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/OutlinePass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/CopyShader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/FXAAShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/shaders/LuminosityHighPassShader.js"></script>
-
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x808080);
+        renderer.setClearColor(0xffffff); // Set background color to white
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         const loader = new THREE.OBJLoader();
         loader.load('./models/iPhone13_.obj', function (object) {
             const material = new THREE.MeshStandardMaterial({
-                color: 0xffffff,
-                metalness: 0.5,
-                roughness: 0.2
+                color: 0xaaaaaa, // Adjust color here (light gray)
+                metalness: 0.8, // Increase metalness for more metallic appearance
+                roughness: 0.1 // Decrease roughness for smoother surface
             });
             object.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
