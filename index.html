@@ -23,17 +23,16 @@
         <!-- Your website footer content here -->
     </footer>
 
-    <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js';
-        import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/loaders/OBJLoader.js';
-
+    <script src="https://cdn.jsdelivr.net/npm/three@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js"></script>
+    <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(600, 400);
         document.getElementById('model-container').appendChild(renderer.domElement);
 
-        const loader = new OBJLoader();
+        const loader = new THREE.OBJLoader();
         loader.load('models/iPhone13.obj', function (object) {
             scene.add(object);
         });
