@@ -38,16 +38,12 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0xffffff); // Set background color to white
+        renderer.setClearColor("#e5e5e5"); // Set background color to white
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         const loader = new THREE.OBJLoader();
         loader.load('./models/iPhone13_.obj', function (object) {
-            const material = new THREE.MeshStandardMaterial({
-                color: 0xaaaaaa, // Adjust color here (light gray)
-                metalness: 0.8, // Increase metalness for more metallic appearance
-                roughness: 0.1 // Decrease roughness for smoother surface
-            });
+            const material = new THREE.MeshLambertMaterial({color: 0xF7F7F7});
             object.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
                     child.material = material;
@@ -59,11 +55,15 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(0, 0.5, 0.5).normalize();
-        scene.add(directionalLight);
+        var light = new THREE.PointLight(0xFFFFFF, 1, 1000)
+        light.position.set(0,0,0);
+        scene.add(light);
 
-        camera.position.z = 18;
+        var light = new THREE.PointLight(0xFFFFFF, 2, 1000)
+        light.position.set(0,0,25);
+        scene.add(light);
+
+        camera.position.z = 10;
 
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
