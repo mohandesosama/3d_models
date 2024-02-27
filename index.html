@@ -3,7 +3,30 @@
 <head>
     <title>3D Model Viewer with Enhanced Detail</title>
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
+      body { margin: 0; font-family: Arial, sans-serif; }
+      header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
 
         #container {
             display: flex;
@@ -11,57 +34,84 @@
             height: 100vh;
         }
 
-        #model-container {
-            flex: 1;
+        .window {
+            width: 30%; /* Set to 30% of the entire document size */
+            height: 100vh; /* Take full height of the viewport */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            border: 1px solid #ff0;
+            margin: 10px;
+            overflow: hidden;
+            position: relative;
         }
 
         .model-div {
-            width: 90%; /* Adjust as needed */
-            height: 150px; /* Adjust as needed */
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+            width: 100%; /* Take full width of the window */
+            height: 100%;
+            border-bottom: 1px solid #f00;
+            overflow: auto;
+            box-sizing: border-box;
         }
 
         #viewer-container {
-            flex: 3;
+            width: 70%; /* Set to 70% of the entire document size */
+            height: 100vh; /* Take full height of the viewport */
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid #000;
+            margin: 10px;
+            overflow: hidden;
+            position: relative;
         }
 
         #viewer {
-            width: 70%;
-            height: 70%;
-            border: 1px solid #ccc;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            bottom: 0;
+            width: 100%;
         }
 
     </style>
 </head>
 <body>
-    <header>
-        <!-- Your website header content here -->
+     <header>
+        Mohammed Osama
+        <nav>
+            <a href="#">3D Models</a>
+            <a href="#">2D Images</a>
+        </nav>
     </header>
 
     <div id="container">
-        <div id="model-container">
+        <div class="window" id="model-container">
             <div class="model-div" onclick="loadModel(this, 'models/iPhone13_1.obj')">Model 1</div>
             <div class="model-div" onclick="loadModel(this, 'models/iPhone13_.obj')">Model 2</div>
             <div class="model-div" onclick="loadModel(this, 'models/iPhone13.obj')">Model 3</div>
             <!-- Add more divs for additional models -->
         </div>
 
-        <div id="viewer-container">
+        <div class="window" id="viewer-container">
             <div id="viewer"></div>
         </div>
     </div>
 
     <footer>
-        <!-- Your website footer content here -->
+        &copy; 2024 Mohammed Osama
     </footer>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js"></script>
@@ -69,10 +119,10 @@
 
     <script>
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, document.getElementById('viewer').clientWidth/document.getElementById('viewer').clientHeight, 0.1, 1000);
         camera.position.set(0, 0, 10); // Set camera position
         const renderer = new THREE.WebGLRenderer({antialias:true});
-        renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.7); // Adjust the size
+        renderer.setSize(document.getElementById('viewer').clientWidth, document.getElementById('viewer').clientHeight); // Use viewer div width and height
         renderer.setClearColor("#e5e5e5"); // Set background color to white
 
         // Variables to store the current model and its div container
@@ -114,8 +164,8 @@
         document.getElementById('viewer').appendChild(renderer.domElement);
 
         window.addEventListener('resize', function () {
-            renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.7);
-            camera.aspect = window.innerWidth / window.innerHeight;
+            renderer.setSize(document.getElementById('viewer').clientWidth, document.getElementById('viewer').clientHeight);
+            camera.aspect = document.getElementById('viewer').clientWidth / document.getElementById('viewer').clientHeight;
             camera.updateProjectionMatrix();
         });
 
