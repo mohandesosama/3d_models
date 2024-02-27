@@ -2,10 +2,7 @@
 <html>
 <head>
     <title>3D Model Viewer with Enhanced Detail</title>
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
-        #model-container { width: 100%; height: 100vh; margin: 0; background-color: white; }
-    </style>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -16,7 +13,12 @@
         <h1>Mohammed Osama Artwork</h1>
         <p>Fusion 360 models</p>
 
-        <div id="model-container"></div>
+        <div id="model-container">
+            <div class="model-div" onclick="loadModel(this, 'models/iPhone13_1.obj')"></div>
+            <div class="model-div" onclick="loadModel(this, 'models/another_model.obj')"></div>
+            <div class="model-div" onclick="loadModel(this, 'models/yet_another_model.obj')"></div>
+            <!-- Add more divs for additional models -->
+        </div>
     </main>
 
     <footer>
@@ -34,6 +36,43 @@
         const renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor("#e5e5e5"); // Set background color to white
+
+         // Variables to store the current model and its div container
+         let currentModel = null;
+        let currentDiv = null;
+
+        function loadModel(div, modelPath) {
+            // Remove any previously loaded model
+            if (currentModel) {
+                scene.remove(currentModel);
+                currentModel = null;
+            }
+
+            // Set the current div
+            currentDiv = div;
+
+            // Load the OBJ file
+            const loader = new THREE.OBJLoader();
+            loader.load(modelPath, function (object) {
+                var material = new THREE.MeshPhysicalMaterial({
+                    color: 0xffffff,
+                    metalness: 0.5, // Adjust as needed
+                    roughness: 0.5, // Adjust as needed
+                    transparent: false,
+                    opacity: 0.8, // Adjust as needed
+                    envMapIntensity: 1, // Adjust as needed
+                    reflectivity: 0.8 // Adjust as needed
+                });
+                object.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        child.material = material;
+                    }
+                });
+                scene.add(object);
+                currentModel = object;
+            });
+        }
+
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         window.addEventListener('resize', function () {
@@ -42,24 +81,7 @@
             camera.updateProjectionMatrix();
         });
 
-        const loader = new THREE.OBJLoader();
-        loader.load('models/iPhone13_1.obj', function (object) {
-            var material = new THREE.MeshPhysicalMaterial( {
-                color: 0xffffff,
-                metalness: 0.5, // Adjust as needed
-                roughness: 0.5, // Adjust as needed
-                transparent: false,
-                opacity: 0.8, // Adjust as needed
-                envMapIntensity: 1, // Adjust as needed
-                reflectivity: 0.8 // Adjust as needed
-            } );
-            object.traverse(function (child) {
-                if (child instanceof THREE.Mesh) {
-                    child.material = material;
-                }
-            });
-            scene.add(object);
-        });
+
 /*
         // Create a cube and add it to the scene
         var geometry = new THREE.BoxGeometry(1, 1, 1);
