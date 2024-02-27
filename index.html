@@ -2,24 +2,62 @@
 <html>
 <head>
     <title>3D Model Viewer with Enhanced Detail</title>
-    <link href="style.css" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+
+        #container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #model-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .model-div {
+            width: 200px; /* Adjust as needed */
+            height: 200px; /* Adjust as needed */
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        #viewer-container {
+            flex: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #viewer {
+            width: 70%;
+            height: 70%;
+            border: 1px solid #ccc;
+        }
+
+    </style>
 </head>
 <body>
     <header>
         <!-- Your website header content here -->
     </header>
 
-    <main>
-        <h1>Mohammed Osama Artwork</h1>
-        <p>Fusion 360 models</p>
-
+    <div id="container">
         <div id="model-container">
-            <div class="model-div" onclick="loadModel(this, 'models/iPhone13_1.obj')"></div>
-            <div class="model-div" onclick="loadModel(this, 'models/another_model.obj')"></div>
-            <div class="model-div" onclick="loadModel(this, 'models/yet_another_model.obj')"></div>
+            <div class="model-div" onclick="loadModel(this, 'models/iPhone13_1.obj')">Model 1</div>
+            <div class="model-div" onclick="loadModel(this, 'models/iPhone13_.obj')">Model 2</div>
+            <div class="model-div" onclick="loadModel(this, 'models/iPhone13.obj')">Model 3</div>
             <!-- Add more divs for additional models -->
         </div>
-    </main>
+
+        <div id="viewer-container">
+            <div id="viewer"></div>
+        </div>
+    </div>
 
     <footer>
         <!-- Your website footer content here -->
@@ -34,11 +72,11 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.set(0, 0, 10); // Set camera position
         const renderer = new THREE.WebGLRenderer({antialias:true});
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.7); // Adjust the size
         renderer.setClearColor("#e5e5e5"); // Set background color to white
 
-         // Variables to store the current model and its div container
-         let currentModel = null;
+        // Variables to store the current model and its div container
+        let currentModel = null;
         let currentDiv = null;
 
         function loadModel(div, modelPath) {
@@ -73,22 +111,13 @@
             });
         }
 
-        document.getElementById('model-container').appendChild(renderer.domElement);
+        document.getElementById('viewer').appendChild(renderer.domElement);
 
         window.addEventListener('resize', function () {
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.7);
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
-
-
-/*
-        // Create a cube and add it to the scene
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var material = new THREE.MeshLambertMaterial({color: 0xF7F7F7});
-        var cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-*/
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
         scene.add(ambientLight);
