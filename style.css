@@ -1,3 +1,7 @@
+/* my passphrase is "my mac pass" for ssh connection 
+to run ssh agent do 
+eval "$(ssh-agent -s)"
+*/
 body { margin: 0; font-family: Arial, sans-serif; }
 
 #model-container {
