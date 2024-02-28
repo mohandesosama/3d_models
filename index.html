@@ -19,7 +19,7 @@
             display: flex;
             justify-content: flex-start; /* Align items to the left */
             align-items: center;
-            margin-top: 0px;
+            margin-bottom: 10px;
             padding: 10px 0; /* Add padding to separate from header */
             border-bottom: 1px solid #333; /* Add a border to separate from header */
         }
@@ -56,8 +56,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ff0;
-            margin: 10px;
+            border: 1px solid #f0f;
+            margin: 0px;
             overflow: hidden;
             position: relative;
         }
@@ -77,7 +77,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #000;
-            margin: 10px;
+            margin: 0px;
             overflow: hidden;
             position: relative;
         }
@@ -92,11 +92,13 @@
             background-color: #333;
             color: #fff;
             padding: 20px;
+            margin-top:10px;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
             bottom: 0;
             width: 100%;
+            height:150px;
         }
 
     </style>
@@ -112,9 +114,11 @@
 
 <div id="container">
     <div class="window" id="model-container">
+        <!--
         <div class="model-div"><a href="#" onclick="loadModel(this,'models/iPhone13_1.obj')">Model 1</a></div>
         <div class="model-div"><a href="#" onclick="loadModel(this, 'models/iPhone13_.obj')">Model 2</a></div>
         <div class="model-div"><a href="#" onclick="loadModel(this, 'models/iPhone13.obj')">Model 3</a></div>
+        -->
     </div>
 
     <div class="window" id="viewer-container">
@@ -207,6 +211,30 @@
         });
     }
 
+    function updateModelList(modelFiles) {
+
+        modelFiles.forEach(function (file) {
+            const modelDiv = document.createElement('div');
+            modelDiv.textContent = file;
+            modelDiv.classList.add('model-div');
+            modelDiv.addEventListener('click', function () {
+                loadModel(this, 'models/' + file);
+            });
+            document.getElementById('model-container').appendChild(modelDiv);
+        });
+    }
+
+    // Fetch the list of model files from the server
+    // next we implement this part automatically.
+    const data = [
+    'iPhone13_1.obj',
+    'iPhone13_.obj',
+    'iPhone13.obj',
+    // Add more filenames as needed
+        ];
+   updateModelList(data);
+
+        
 
     document.getElementById('viewer').appendChild(renderer.domElement);
 
