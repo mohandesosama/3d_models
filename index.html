@@ -5,7 +5,7 @@
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
         header {
-            background-color: #333;
+            background-color: #05094a;
             color: #fff;
             padding-top: 50px;
             text-align: center;
@@ -15,7 +15,7 @@
         }
 
         nav {
-            background-color: #444; /* Change background color of the menu */
+            background-color: #fff; /* Change background color of the menu */
             display: flex;
             justify-content: flex-start; /* Align items to the left */
             align-items: center;
@@ -25,10 +25,11 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: bold;
             padding: 10px 20px;
-            background-color: #555; /* Specific background color for menu items */
+            margin: 8px 8px;
+            background-color: #05094a; /* Specific background color for menu items */
         }
 
         nav a:not(:last-child) {
@@ -96,6 +97,25 @@
             height:150px;
         }
 
+        #download-link {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+        }
+
+        #download-link a {
+            color: #050528;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 20px;
+      
+        }
+
+        #download-link a:hover {
+            font-weight: bold; /* Change background color on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -122,6 +142,9 @@
 
     <div class="window" id="viewer-container">
         <div id="viewer"></div>
+        <div id="download-link">
+            <a href="#">Download This Model</a> <!-- Add download link -->
+        </div>
     </div>
 </div>
 
@@ -196,8 +219,8 @@
             // Highlight the selected model div
             const modelDivs = document.querySelectorAll('.model-div');
             for (let i = 0; i < modelDivs.length; i++) {
-                //console.log("current div text is "+ modelDivs[i].textContent.trim());
-                if (modelDivs[i].textContent.trim() === currentDiv.textContent.trim()) {
+                // i manually check the id
+                if (modelDivs[i].id === currentDiv.id) {
                     modelDivs[i].style.backgroundColor = '#999999'; // Highlight selected model div
                     currentDiv = modelDivs[i];
                 } else {
@@ -214,7 +237,9 @@
 
         modelFiles.forEach(function (file) {
             const modelDiv = document.createElement('div');
-            modelDiv.textContent = file;
+            modelDiv.textContent = "Click to view the model";
+            // if i want to view specific model from the list of model, id of it showld be defined.
+            modelDiv.id='models/' + file;
             modelDiv.classList.add('model-div');
             modelDiv.addEventListener('click', function () {
                 loadModel(this, 'models/' + file);
