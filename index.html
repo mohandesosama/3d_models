@@ -9,12 +9,6 @@
             font-family: Arial, sans-serif;
         }
 
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-        }
-
         nav {
             background-color: #05094a;
             display: flex;
@@ -59,19 +53,14 @@
 
         .left-container {
             width: 30%;
+            border: 1px solid #f0f;
+            margin-bottom: 20px;
         }
 
         .right-container {
             width: 70%;
         }
 
-        .window {
-            width: 100%;
-            border: 1px solid #f0f;
-            margin-bottom: 20px;
-            overflow: hidden;
-            position: relative;
-        }
 
         .model-div {
             width: 100%;
@@ -80,17 +69,13 @@
             box-sizing: border-box;
         }
 
-        #viewer-container {
-            border: 1px solid #000;
-            overflow: hidden;
-            position: relative;
-        }
+       
 
         #viewer {
             width: 100%;
             height: calc(100vh - 100px);
             /* Adjust height based on nav and footer height */
-            border: none;
+            border: 1px solid #000;
         }
 
         footer {
@@ -141,7 +126,7 @@
 
     <div id="container">
         <div class="left-container">
-            <div class="window" id="model-container">
+            <div class="left-container" id="model-container">
                 <!--
     <div class="model-div"><a href="#" onclick="loadModel(this,'models/iPhone13_1.obj')">Model 1</a></div>
     <div class="model-div"><a href="#" onclick="loadModel(this, 'models/iPhone13_.obj')">Model 2</a></div>
@@ -150,12 +135,10 @@
             </div>
         </div>
         <div class="right-container">
-            <div class="window" id="viewer-container">
                 <div id="viewer"></div>
                 <div id="download-link">
                     <a href="#">Download This Model</a> <!-- Add download link -->
                 </div>
-            </div>
         </div>
     </div>
     </main>
