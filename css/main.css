@@ -22,7 +22,7 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
     padding: 10px 20px;
     margin: 8px 8px;
@@ -40,7 +40,7 @@ nav a:hover {
 #container {
     display: flex;
     justify-content: space-between;
-    margin-top: 80px;
+    margin: 100px 80px 80px 80px; /*top right bottom left*/
     /* Adjust based on nav height */
     padding: 20px;
 }
@@ -49,25 +49,25 @@ nav a:hover {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     border: 1px solid #f0f;
     margin-bottom: 20px;
     overflow-y: auto; /* scrolls are not working */
 }
 
 #right-container {
-    width: 70%;
+    width: 60%;
 }
+#detail-container{
+    width: 20%;
+    border: 1px solid yellowgreen;
 
-
+}
 .model-div {
     border-bottom: 1px solid #f00;
     height: 250px;
     
 }
-
-
-
 #viewer {
     width: 100%;
     height: calc(100vh - 100px);
@@ -86,10 +86,7 @@ footer {
 }
 
 #download-link {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 20px;
+    position: relative;
 }
 
 #download-link a {
