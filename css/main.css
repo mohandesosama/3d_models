@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: #05094a;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    box-shadow: rgba(47, 47, 107, 0.5) 10px 10px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure nav appears above other content */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 8px 8px;
+}
+
+nav a:not(:last-child) {
+    margin-right: 10px;
+    /* Add margin between menu items */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    /* Adjust based on nav height */
+    padding: 20px;
+}
+
+#left-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 30%;
+    border: 1px solid #f0f;
+    margin-bottom: 20px;
+    overflow-y: auto; /* scrolls are not working */
+}
+
+#right-container {
+    width: 70%;
+}
+
+
+.model-div {
+    border-bottom: 1px solid #f00;
+    height: 250px;
+    
+}
+
+
+
+#viewer {
+    width: 100%;
+    height: calc(100vh - 100px);
+    /* Adjust height based on nav and footer height */
+    border: 1px solid #000;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+}
+
+#download-link {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+}
+
+#download-link a {
+    color: #050528;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 20px;
+}
+
+#download-link a:hover {
+    font-weight: bold;
+    /* Change background color on hover */
+}
