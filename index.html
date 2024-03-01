@@ -16,7 +16,7 @@
             align-items: center;
             padding: 10px;
             border-bottom: 1px solid #333;
-            box-shadow: 0px 5px 0px rgba(47, 47, 107, 0.5);
+            box-shadow: rgba(47, 47, 107, 0.5) 10px 10px 15px;
             position: fixed;
             top: 0;
             left: 0;
@@ -46,27 +46,30 @@
         #container {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 80px;
             /* Adjust based on nav height */
             padding: 20px;
         }
 
-        .left-container {
+        #left-container {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
             width: 30%;
             border: 1px solid #f0f;
             margin-bottom: 20px;
+            overflow-y: auto; /* scrolls are not working */
         }
 
-        .right-container {
+        #right-container {
             width: 70%;
         }
 
 
         .model-div {
-            width: 100%;
             border-bottom: 1px solid #f00;
-            overflow: auto;
-            box-sizing: border-box;
+            height: 250px;
+            
         }
 
        
@@ -125,16 +128,14 @@
     <main>
 
     <div id="container">
-        <div class="left-container">
-            <div class="left-container" id="model-container">
+        <div id="left-container">
                 <!--
     <div class="model-div"><a href="#" onclick="loadModel(this,'models/iPhone13_1.obj')">Model 1</a></div>
     <div class="model-div"><a href="#" onclick="loadModel(this, 'models/iPhone13_.obj')">Model 2</a></div>
     <div class="model-div"><a href="#" onclick="loadModel(this, 'models/iPhone13.obj')">Model 3</a></div>
     -->
-            </div>
         </div>
-        <div class="right-container">
+        <div id="right-container">
                 <div id="viewer"></div>
                 <div id="download-link">
                     <a href="#">Download This Model</a> <!-- Add download link -->
@@ -237,7 +238,7 @@
                 modelDiv.addEventListener('click', function () {
                     loadModel(this, 'models/' + file);
                 });
-                document.getElementById('model-container').appendChild(modelDiv);
+                document.getElementById('left-container').appendChild(modelDiv);
             });
         }
 
@@ -246,6 +247,7 @@
         const data = [
             'iPhone13_1.obj',
             'iPhone13_.obj',
+            'iPhone13.obj',
             'iPhone13.obj',
             // Add more filenames as needed
         ];
