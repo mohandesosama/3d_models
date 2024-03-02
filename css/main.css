@@ -93,8 +93,13 @@ footer {
 }
 
 #download-link {
-    position: relative;
+    position: absolute;
+    bottom: 0; /* Align the bottom of the download link to the bottom of its parent div */
+    right: 0; /* Align the right of the download link to the right of its parent div */
+    margin-bottom:0px; /* Optional: Add some margin to separate from the edge of the parent div */
+    margin-right:300px; /* Optional: Add some margin to separate from the edge of the parent div */
 }
+
 
 #download-link a {
     color: #050528;
@@ -104,7 +109,7 @@ footer {
 }
 
 #download-link a:hover {
-    font-weight: bold;
+    text-decoration: underline;
     /* Change background color on hover */
 }
 #scrollUp {
@@ -121,4 +126,16 @@ footer {
     z-index: 1;
     background-color: white; /* Ensure it's visible over images */
     width:100%
+}
+.progress-bar {
+    width: 25%;
+    height: 20px; /* Adjust height as needed */
+    background-color: #f0f0f0; /* Background color of the progress bar */
+    border: 1px solid #ccc; /* Border color */
+    text-align: center; /* Center text */
+    line-height: 20px; /* Center text vertically */
+    position: absolute; /* Position the progress bar relative to its parent div */
+    top: 50%; /* Align the top of the progress bar to the middle of its parent div */
+    left: 50%; /* Align the left of the progress bar to the middle of its parent div */
+    transform: translate(-50%, -50%);
 }
