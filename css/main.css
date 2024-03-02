@@ -47,12 +47,14 @@ nav a:hover {
 
 #left-container {
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
     width: 20%;
     border: 1px solid #f0f;
     margin-bottom: 20px;
-    overflow-y: auto; /* scrolls are not working */
+    position:relative;
+    height: calc(100vh - 100px);     /* Adjust height based on nav and footer height */
+    display: block;
+    overflow: hidden;
 }
 
 #right-container {
@@ -61,11 +63,15 @@ nav a:hover {
 #detail-container{
     width: 20%;
     border: 1px solid yellowgreen;
+    height: calc(100vh - 100px);
+    
 
 }
-.model-div {
+.model-img {
+    flex: 1;
     border-bottom: 1px solid #f00;
-    height: 250px;
+    height: 130px;
+    overflow-y: scroll;
     
 }
 #viewer {
@@ -76,13 +82,14 @@ nav a:hover {
 }
 
 footer {
-    background-color: #333;
+    background-color: #05094a;
     color: #fff;
     padding: 20px;
     text-align: center;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
     width: 100%;
+    height: 100px;
 }
 
 #download-link {
@@ -99,4 +106,19 @@ footer {
 #download-link a:hover {
     font-weight: bold;
     /* Change background color on hover */
+}
+#scrollUp {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white; /* Ensure it's visible over images */
+    width:100%
+}
+
+#scrollDown {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background-color: white; /* Ensure it's visible over images */
+    width:100%
 }
