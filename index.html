@@ -21,20 +21,20 @@
     </nav>
     <main>
 
-    <div id="container">
-        <div id="left-container">
+        <div id="container">
+            <div id="left-container">
                 <!-- List of models are displayed here -->
-        </div>
-        <div id="right-container">
+            </div>
+            <div id="right-container">
                 <div id="viewer"></div>
                 <div id="download-link">
                     <a href="#">Download This Model</a> <!-- Add download link -->
                 </div>
+            </div>
+            <div id="detail-container">
+
+            </div>
         </div>
-        <div id="detail-container">
-            
-        </div>
-    </div>
     </main>
     <footer>
         &copy; 2024 Designed by: Osama Hosameldeen
@@ -46,9 +46,9 @@
     <script type="module" src="modules/main.js"></script>
     <script type="module">
 
-        import { loadModel,updateModelList } from './modules/main.js';
+        import { constructThumbsPanel, showProgressBar } from './modules/main.js';
 
-        const objViewer=document.getElementById('viewer');
+        const objViewer = document.getElementById('viewer');
         objViewer.addEventListener('mousedown', () => {
             objViewer.style.cursor = 'grabbing';
         });
@@ -70,8 +70,98 @@
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(objViewer.clientWidth, objViewer.clientHeight); // Use viewer div width and height
         renderer.setClearColor("#e5e5e5"); // Set background color to white
-       
-        const thum_container=document.getElementById('left-container');
+
+        const thum_container = document.getElementById('left-container');
+
+        // Variables to store the current model and its div container
+        let currentModel = null;
+        let currentDiv = null;
+        let loadingModel = false; // Variable to track whether a model is currently being loaded
+
+        function loadModel(div, modelPath) {
+
+            // If a model is already being loaded, return
+            if (loadingModel) {
+                console.log("A model is already being loaded. Please wait.");
+                return;
+            }
+            // Set loadingModel flag to true to indicate that a model is being loaded
+            loadingModel = true;
+
+            // Show progress bar
+            const progressBar = showProgressBar(objViewer);
+
+            // Simulate delay with setTimeout (5 seconds in this example)
+            // Load the OBJ file
+            const loader = new THREE.OBJLoader();
+            loader.load(modelPath, function (object) {
+                // Remove progress bar
+                objViewer.removeChild(progressBar);
+
+                // Remove any previously loaded model
+                if (currentModel) {
+                    scene.remove(currentModel);
+                    currentModel = null;
+                }
+
+                // Set the current div
+                currentDiv = div;
+
+                // Remove any previously selected model div
+                if (currentDiv) {
+                    currentDiv.style.backgroundColor = ''; // Reset background color
+                }
+
+                // Load the new model
+                var material = new THREE.MeshPhysicalMaterial({
+                    color: 0xffffff,
+                    metalness: 0.5, // Adjust as needed
+                    roughness: 0.5, // Adjust as needed
+                    transparent: false,
+                    opacity: 0.8, // Adjust as needed
+                    envMapIntensity: 1, // Adjust as needed
+                    reflectivity: 0.8 // Adjust as needed
+                });
+                object.traverse(function (child) {
+                    if (child instanceof THREE.Mesh) {
+                        child.material = material;
+                    }
+                });
+                scene.add(object);
+                currentModel = object;
+
+                // Highlight the selected model div
+                const modelDivs = document.querySelectorAll('.model-img');
+                for (let i = 0; i < modelDivs.length; i++) {
+                    // i manually check the id
+                    if (modelDivs[i].id === currentDiv.id) {
+                        modelDivs[i].style.backgroundColor = '#999999'; // Highlight selected model div
+                        currentDiv = modelDivs[i];
+                    } else {
+                        modelDivs[i].style.backgroundColor = ''; // Reset other model divs
+                    }
+                }
+
+                // Reset loadingModel flag to false after the model is loaded
+                loadingModel = false;
+            },
+
+                // Progress callback function
+                async function (xhr) {
+                    // Calculate progress percentage
+                    const progress = Math.round(xhr.loaded / xhr.total * 100);
+                    // Update progress bar text
+                    progressBar.textContent = `Loading... ${progress}%`;
+                },
+                // Error callback function
+                function (error) {
+                    console.error('Error loading model:', error);
+                    // Remove progress bar if there's an error
+                    objViewer.removeChild(progressBar);
+                    // Reset loadingModel flag to false after an error occurs
+                    loadingModel = false;
+                });
+        }
 
         // Fetch the list of model files from the server
         // next we implement this part automatically.
@@ -84,9 +174,9 @@
             'iPhone13.obj',
             // Add more filenames as needed
         ];
-        updateModelList(data,thum_container,objViewer,scene);
+        constructThumbsPanel(data, thum_container,loadModel);
 
-        document.getElementById('viewer').appendChild(renderer.domElement);
+        objViewer.appendChild(renderer.domElement);
 
         window.addEventListener('resize', function () {
             renderer.setSize(objViewer.clientWidth, objViewer.clientHeight);
