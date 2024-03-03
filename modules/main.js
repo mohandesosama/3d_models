@@ -11,14 +11,36 @@ function showProgressBar(oViewer) {
     // Return reference to the progress bar element
     return progressBar;
 }
+function enableCotnrolsAndHideLablel(status,ctrls,obj_viewer){
+    ctrls.enabled = status;
+    //change teh mouse cursor accordingly
+    if(status)
+        {
+            obj_viewer.addEventListener('mousedown', () => {
+            obj_viewer.style.cursor = 'grabbing';
+        });
 
+        obj_viewer.addEventListener('mouseup', () => {
+            obj_viewer.style.cursor = 'grab';
+        });
+
+        obj_viewer.addEventListener('mouseenter', () => {
+            obj_viewer.style.cursor = 'grab';
+        });
+
+        obj_viewer.addEventListener('mouseleave', () => {
+            obj_viewer.style.cursor = 'auto';
+        });
+        // Hide the label after the first click
+        document.getElementById('label').style.display = 'none';
+    }
+    else{
+        document.getElementById('label').style.display = 'block';
+        obj_viewer.style.cursor = 'auto';
+    }
+}
 //auto creation of the model files thumnails
-function constructThumbsPanel(modelFiles, left_container, loadFunction) {
-    //adding the up button
-    const upButton = document.createElement('Button');
-    upButton.textContent = "Up";
-    upButton.id = 'scrollUp';
-    left_container.appendChild(upButton);
+function constructThumbsPanel(modelFiles, left_container,obj_viewer,ctrls, loadFunction) {
     // adding the model thumbnails
     modelFiles.forEach(function (file) {
         const modelDiv = document.createElement('div');
@@ -28,25 +50,10 @@ function constructThumbsPanel(modelFiles, left_container, loadFunction) {
         modelDiv.classList.add('model-img');
         modelDiv.addEventListener('click', function () {
             loadFunction(this, 'models/' + file);
+            enableCotnrolsAndHideLablel(false,ctrls,obj_viewer);
         });
         left_container.appendChild(modelDiv);
     });
-
-    //adding the down button
-    const downButton = document.createElement('Button');
-    downButton.textContent = "Down";
-    downButton.id = 'scrollDown';
-    left_container.appendChild(downButton);
-
-    // Event listeners for scroll buttons
-    upButton.addEventListener('click', () => {
-        left_container.scrollTop -= 10; // Adjust scroll amount as needed
-    });
-
-    downButton.addEventListener('click', () => {
-        left_container.scrollTop += 10; // Adjust scroll amount as needed
-    });
-
     let isMouseDown = false;
     let startY;
 
@@ -67,4 +74,4 @@ function constructThumbsPanel(modelFiles, left_container, loadFunction) {
 
 }
 
-export {showProgressBar,constructThumbsPanel}
+export {showProgressBar,constructThumbsPanel, enableCotnrolsAndHideLablel}

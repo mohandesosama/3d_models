@@ -20,19 +20,37 @@
         <a href="#">Contacts</a>
     </nav>
     <main>
-
         <div id="container">
-            <div id="left-container">
-                <!-- List of models are displayed here -->
+            <div class="paragraph_label">
+                The 3D Models Viewer
             </div>
-            <div id="right-container">
-                <div id="viewer"></div>
-                <div id="download-link">
-                    <a href="#">Download This Model</a> <!-- Add download link -->
-                </div>
+            <div class="paragraph">
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
             </div>
-            <div id="detail-container">
+            <div id="models_browser">
 
+                <div id="left-container">
+                    <!-- List of models are displayed here -->
+                </div>
+                <div id="right-container">
+                    <div id="viewer">
+                        <div id="label">Click here to control the model</div>
+                        <div id="download-link">
+                            <a href="#">Download This Model</a> <!-- Add download link -->
+                        </div>
+                    </div>
+
+                </div>
+                <div id="detail-container">
+
+                </div>
             </div>
         </div>
     </main>
@@ -46,24 +64,10 @@
     <script type="module" src="modules/main.js"></script>
     <script type="module">
 
-        import { constructThumbsPanel, showProgressBar } from './modules/main.js';
+        import { constructThumbsPanel, showProgressBar, enableCotnrolsAndHideLablel } from './modules/main.js';
 
         const objViewer = document.getElementById('viewer');
-        objViewer.addEventListener('mousedown', () => {
-            objViewer.style.cursor = 'grabbing';
-        });
 
-        objViewer.addEventListener('mouseup', () => {
-            objViewer.style.cursor = 'grab';
-        });
-
-        objViewer.addEventListener('mouseenter', () => {
-            objViewer.style.cursor = 'grab';
-        });
-
-        objViewer.addEventListener('mouseleave', () => {
-            objViewer.style.cursor = 'auto';
-        });
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, objViewer.clientWidth / objViewer.clientHeight, 0.1, 1000);
         camera.position.set(0, 0, 10); // Set camera position
@@ -163,26 +167,7 @@
                 });
         }
 
-        // Fetch the list of model files from the server
-        // next we implement this part automatically.
-        const data = [
-            'iPhone13_1.obj',
-            'iPhone13_.obj',
-            'iPhone13.obj',
-            'iPhone13_1.obj',
-            'iPhone13_.obj',
-            'iPhone13.obj',
-            // Add more filenames as needed
-        ];
-        constructThumbsPanel(data, thum_container,loadModel);
-
-        objViewer.appendChild(renderer.domElement);
-
-        window.addEventListener('resize', function () {
-            renderer.setSize(objViewer.clientWidth, objViewer.clientHeight);
-            camera.aspect = objViewer.clientWidth / objViewer.clientHeight;
-            camera.updateProjectionMatrix();
-        });
+      
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
         scene.add(ambientLight);
@@ -202,6 +187,40 @@
         controls.screenSpacePanning = false;
         controls.maxPolarAngle = Math.PI / 2;
         controls.enablePan = false; // Disable panning
+        controls.enabled = false; //initially disabled
+
+        // Fetch the list of model files from the server
+        // next we implement this part automatically.
+        const data = [
+            'iPhone13_1.obj',
+            'iPhone13_.obj',
+            'iPhone13.obj',
+            'iPhone13_1.obj',
+            'iPhone13_.obj',
+            'iPhone13.obj',
+            // Add more filenames as needed
+        ];
+        constructThumbsPanel(data, thum_container,objViewer, controls,loadModel);
+
+        objViewer.appendChild(renderer.domElement);
+
+        window.addEventListener('resize', function () {
+            renderer.setSize(objViewer.clientWidth, objViewer.clientHeight);
+            camera.aspect = objViewer.clientWidth / objViewer.clientHeight;
+            camera.updateProjectionMatrix();
+        });
+       
+        function onModelClick(event) {
+            // Enable orbit controls on the first click
+            enableCotnrolsAndHideLablel(true,controls, objViewer);
+            // Remove click event listener after first click
+            objViewer.removeEventListener('click', onModelClick);
+           
+
+        }
+        // Add click event listener to the container div
+        container.addEventListener('click', onModelClick, false);
+
 
         function animate() {
             requestAnimationFrame(animate);
