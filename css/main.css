@@ -111,7 +111,7 @@ nav a:hover {
     /* Adjust height based on nav and footer height */
     border: 1px solid #000;
 }
-#label {
+#controlsButton {
     position: absolute;
     top: 50%;
     left: 50%;

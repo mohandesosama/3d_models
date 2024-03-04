@@ -1,5 +1,5 @@
 // Function to show progress bar
-function showProgressBar(oViewer) {
+export function showProgressBar(oViewer) {
     // Create a progress bar element
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar');
@@ -11,36 +11,54 @@ function showProgressBar(oViewer) {
     // Return reference to the progress bar element
     return progressBar;
 }
-function enableCotnrolsAndHideLablel(status,ctrls,obj_viewer){
-    ctrls.enabled = status;
-    //change teh mouse cursor accordingly
-    if(status)
-        {
-            obj_viewer.addEventListener('mousedown', () => {
-            obj_viewer.style.cursor = 'grabbing';
-        });
-
-        obj_viewer.addEventListener('mouseup', () => {
-            obj_viewer.style.cursor = 'grab';
-        });
-
-        obj_viewer.addEventListener('mouseenter', () => {
-            obj_viewer.style.cursor = 'grab';
-        });
-
-        obj_viewer.addEventListener('mouseleave', () => {
-            obj_viewer.style.cursor = 'auto';
-        });
-        // Hide the label after the first click
-        document.getElementById('label').style.display = 'none';
+export function createControlsButton(ctrls) {
+    var button = document.getElementById('controlsButton');
+    
+    // If button is not created, create it
+    if (!button) {
+      button = document.createElement('button');
+      button.setAttribute('id', 'controlsButton');
+      button.textContent = 'Click to control the model';
+      button.addEventListener('click', function() {
+        hideButton(ctrls);
+      });
+      var obj_viewer = document.getElementById('viewer');
+      obj_viewer.appendChild(button);
+      obj_viewer.style.cursor = 'auto';
+      ctrls.enabled=false;
     }
-    else{
-        document.getElementById('label').style.display = 'block';
+  }
+  function hideButton(ctrls) {
+    var obj_viewer=document.getElementById('viewer');
+    var button = document.getElementById('controlsButton');
+    
+    // If button exists, remove it
+    if (button) {
+      button.remove();
+
+      ctrls.enabled=true;
+      obj_viewer.addEventListener('mousedown', () => {
+        obj_viewer.style.cursor = 'grabbing';
+    });
+
+    obj_viewer.addEventListener('mouseup', () => {
+        obj_viewer.style.cursor = 'grab';
+    });
+
+    obj_viewer.addEventListener('mouseenter', () => {
+        obj_viewer.style.cursor = 'grab';
+    });
+
+    obj_viewer.addEventListener('mouseleave', () => {
         obj_viewer.style.cursor = 'auto';
+    });
+      
     }
-}
+  }
+  
 //auto creation of the model files thumnails
-function constructThumbsPanel(modelFiles, left_container,obj_viewer,ctrls, loadFunction) {
+export function constructThumbsPanel(modelFiles, left_container,ctrls, loadFunction) {
+    const download_link=document.getElementById('download-link')
     // adding the model thumbnails
     modelFiles.forEach(function (file) {
         const modelDiv = document.createElement('div');
@@ -50,7 +68,9 @@ function constructThumbsPanel(modelFiles, left_container,obj_viewer,ctrls, loadF
         modelDiv.classList.add('model-img');
         modelDiv.addEventListener('click', function () {
             loadFunction(this, 'models/' + file);
-            enableCotnrolsAndHideLablel(false,ctrls,obj_viewer);
+            createControlsButton(ctrls);
+            download_link.style.display='block';
+            download_link.setAttribute('link', 'models/' + file); //create custom attribute.
         });
         left_container.appendChild(modelDiv);
     });
@@ -73,5 +93,3 @@ function constructThumbsPanel(modelFiles, left_container,obj_viewer,ctrls, loadF
     });
 
 }
-
-export {showProgressBar,constructThumbsPanel, enableCotnrolsAndHideLablel}

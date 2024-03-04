@@ -28,7 +28,10 @@
                 <p>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    and scrambled it to make a type specimen book. 
+                </p>
+                <p>
+                    It has survived not only five centuries, but also the
                     leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
                     with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
                     publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -41,9 +44,8 @@
                 </div>
                 <div id="right-container">
                     <div id="viewer">
-                        <div id="label">Click here to control the model</div>
                         <div id="download-link">
-                            <a href="#">Download This Model</a> <!-- Add download link -->
+                            <a href="#"></a> <!-- Add download link -->
                         </div>
                     </div>
 
@@ -64,9 +66,12 @@
     <script type="module" src="modules/main.js"></script>
     <script type="module">
 
-        import { constructThumbsPanel, showProgressBar, enableCotnrolsAndHideLablel } from './modules/main.js';
+        import { constructThumbsPanel, showProgressBar, createControlsButton } from './modules/main.js';
 
         const objViewer = document.getElementById('viewer');
+        const download_link=document.getElementById('download-link')
+        download_link.innerText="Download this model"
+        download_link.style.display='none';
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, objViewer.clientWidth / objViewer.clientHeight, 0.1, 1000);
@@ -188,6 +193,7 @@
         controls.maxPolarAngle = Math.PI / 2;
         controls.enablePan = false; // Disable panning
         controls.enabled = false; //initially disabled
+        objViewer.style.cursor = 'auto'; //set the cursor to be normal cursor
 
         // Fetch the list of model files from the server
         // next we implement this part automatically.
@@ -200,7 +206,7 @@
             'iPhone13.obj',
             // Add more filenames as needed
         ];
-        constructThumbsPanel(data, thum_container,objViewer, controls,loadModel);
+        constructThumbsPanel(data, thum_container,controls,loadModel);
 
         objViewer.appendChild(renderer.domElement);
 
@@ -210,17 +216,7 @@
             camera.updateProjectionMatrix();
         });
        
-        function onModelClick(event) {
-            // Enable orbit controls on the first click
-            enableCotnrolsAndHideLablel(true,controls, objViewer);
-            // Remove click event listener after first click
-            objViewer.removeEventListener('click', onModelClick);
-           
-
-        }
-        // Add click event listener to the container div
-        container.addEventListener('click', onModelClick, false);
-
+        //createControlsButton(controls);
 
         function animate() {
             requestAnimationFrame(animate);
