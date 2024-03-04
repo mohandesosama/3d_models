@@ -66,7 +66,7 @@ nav a:hover {
 }
 .paragraph{
     color:#05094a;
-    font-size: 17px;
+    font-size: 18px;
     margin:20px 0px 20px 0px;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 30px;
@@ -126,8 +126,8 @@ nav a:hover {
     position: absolute;
     bottom: 0; /* Align the bottom of the download link to the bottom of its parent div */
     right: 0; /* Align the right of the download link to the right of its parent div */
-    margin-bottom:0px; /* Optional: Add some margin to separate from the edge of the parent div */
-    margin-right:300px; /* Optional: Add some margin to separate from the edge of the parent div */
+    margin-bottom:3px; /* Optional: Add some margin to separate from the edge of the parent div */
+    margin-right:3px; /* Optional: Add some margin to separate from the edge of the parent div */
 }
 
 

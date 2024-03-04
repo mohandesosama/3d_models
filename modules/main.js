@@ -14,61 +14,62 @@ export function showProgressBar() {
 }
 export function createControlsButton(ctrls) {
     var button = document.getElementById('controlsButton');
-    
+
     // If button is not created, create it
     if (!button) {
-      button = document.createElement('button');
-      button.setAttribute('id', 'controlsButton');
-      button.textContent = 'Click to control the model';
-      button.addEventListener('click', function() {
-        hideButton(ctrls);
-      });
-      obj_viewer.appendChild(button);
+        button = document.createElement('button');
+        button.setAttribute('id', 'controlsButton');
+        button.textContent = 'Click to control the model';
+        button.addEventListener('click', function () {
+            hideButton(ctrls);
+        });
+        obj_viewer.appendChild(button);
 
-       // Remove event listeners that modify cursor style
-       obj_viewer.removeEventListener('mousedown', setCursorGrabbing);
-       obj_viewer.removeEventListener('mouseup', setCursorGrab);
-       obj_viewer.removeEventListener('mouseenter', setCursorGrab);
-       obj_viewer.removeEventListener('mouseleave', setCursorAuto);
-       
-       // Set cursor style back to default
-       obj_viewer.style.cursor = 'auto';
-    
+        // Remove event listeners that modify cursor style
+        obj_viewer.removeEventListener('mousedown', setCursorGrabbing);
+        obj_viewer.removeEventListener('mouseup', setCursorGrab);
+        obj_viewer.removeEventListener('mouseenter', setCursorGrab);
+        obj_viewer.removeEventListener('mouseleave', setCursorAuto);
 
-      ctrls.enabled=false;
+        // Set cursor style back to default
+        obj_viewer.style.cursor = 'auto';
+
+        ctrls.enabled = false;
     }
-  }
-  function hideButton(ctrls) {
-    var obj_viewer=document.getElementById('viewer');
+}
+function hideButton(ctrls) {
+    var obj_viewer = document.getElementById('viewer');
     var button = document.getElementById('controlsButton');
-    
+
     // If button exists, remove it
     if (button) {
-      button.remove();
-
-      obj_viewer.addEventListener('mousedown', setCursorGrabbing);
-      obj_viewer.addEventListener('mouseup', setCursorGrab);
-      obj_viewer.addEventListener('mouseenter', setCursorGrab);
-      obj_viewer.addEventListener('mouseleave', setCursorAuto);
-      ctrls.enabled=true;
+        //remove the button so the user can interact with the 3d model
+        button.remove();
+        //change the cursor to grab style.
+        obj_viewer.addEventListener('mousedown', setCursorGrabbing);
+        obj_viewer.addEventListener('mouseup', setCursorGrab);
+        obj_viewer.addEventListener('mouseenter', setCursorGrab);
+        obj_viewer.addEventListener('mouseleave', setCursorAuto);
+        //orbit controls are enabled for the user to rotate/zoom the 3d model
+        ctrls.enabled = true;
     }
-  }
-  // Event listener functions
+}
+// Event listener functions
 function setCursorGrabbing() {
     obj_viewer.style.cursor = 'grabbing';
-  }
-  
-  function setCursorGrab() {
+}
+
+function setCursorGrab() {
     obj_viewer.style.cursor = 'grab';
-  }
-  
-  function setCursorAuto() {
+}
+
+function setCursorAuto() {
     obj_viewer.style.cursor = 'auto';
-  }
+}
 //auto creation of the model files thumnails
-export function constructThumbsPanel(modelFiles, left_container,ctrls, loadFunction) {
-    const download_link=document.getElementById('download-link');
-   
+export function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunction) {
+    const download_link = document.getElementById('download-link');
+
     // adding the model thumbnails
     modelFiles.forEach(function (file) {
         const modelDiv = document.createElement('div');
@@ -80,7 +81,7 @@ export function constructThumbsPanel(modelFiles, left_container,ctrls, loadFunct
             loadFunction(this, 'models/' + file);
             createControlsButton(ctrls);
             //display the download link, as the user can download it now
-            download_link.style.display='block';
+            download_link.style.display = 'block';
             //save the link (file path) so we will use it when we click on the link
             download_link.setAttribute('link', 'models/' + file); //create custom attribute.
             //set the cursor
