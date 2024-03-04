@@ -1,12 +1,13 @@
+var obj_viewer = document.getElementById('viewer');
 // Function to show progress bar
-export function showProgressBar(oViewer) {
+export function showProgressBar() {
     // Create a progress bar element
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar');
     progressBar.textContent = 'Loading...';
 
     // Append progress bar to the div
-    oViewer.appendChild(progressBar);
+    obj_viewer.appendChild(progressBar);
 
     // Return reference to the progress bar element
     return progressBar;
@@ -22,9 +23,18 @@ export function createControlsButton(ctrls) {
       button.addEventListener('click', function() {
         hideButton(ctrls);
       });
-      var obj_viewer = document.getElementById('viewer');
       obj_viewer.appendChild(button);
-      obj_viewer.style.cursor = 'auto';
+
+       // Remove event listeners that modify cursor style
+       obj_viewer.removeEventListener('mousedown', setCursorGrabbing);
+       obj_viewer.removeEventListener('mouseup', setCursorGrab);
+       obj_viewer.removeEventListener('mouseenter', setCursorGrab);
+       obj_viewer.removeEventListener('mouseleave', setCursorAuto);
+       
+       // Set cursor style back to default
+       obj_viewer.style.cursor = 'auto';
+    
+
       ctrls.enabled=false;
     }
   }
@@ -36,29 +46,29 @@ export function createControlsButton(ctrls) {
     if (button) {
       button.remove();
 
+      obj_viewer.addEventListener('mousedown', setCursorGrabbing);
+      obj_viewer.addEventListener('mouseup', setCursorGrab);
+      obj_viewer.addEventListener('mouseenter', setCursorGrab);
+      obj_viewer.addEventListener('mouseleave', setCursorAuto);
       ctrls.enabled=true;
-      obj_viewer.addEventListener('mousedown', () => {
-        obj_viewer.style.cursor = 'grabbing';
-    });
-
-    obj_viewer.addEventListener('mouseup', () => {
-        obj_viewer.style.cursor = 'grab';
-    });
-
-    obj_viewer.addEventListener('mouseenter', () => {
-        obj_viewer.style.cursor = 'grab';
-    });
-
-    obj_viewer.addEventListener('mouseleave', () => {
-        obj_viewer.style.cursor = 'auto';
-    });
-      
     }
   }
+  // Event listener functions
+function setCursorGrabbing() {
+    obj_viewer.style.cursor = 'grabbing';
+  }
   
+  function setCursorGrab() {
+    obj_viewer.style.cursor = 'grab';
+  }
+  
+  function setCursorAuto() {
+    obj_viewer.style.cursor = 'auto';
+  }
 //auto creation of the model files thumnails
 export function constructThumbsPanel(modelFiles, left_container,ctrls, loadFunction) {
-    const download_link=document.getElementById('download-link')
+    const download_link=document.getElementById('download-link');
+   
     // adding the model thumbnails
     modelFiles.forEach(function (file) {
         const modelDiv = document.createElement('div');
@@ -69,8 +79,11 @@ export function constructThumbsPanel(modelFiles, left_container,ctrls, loadFunct
         modelDiv.addEventListener('click', function () {
             loadFunction(this, 'models/' + file);
             createControlsButton(ctrls);
+            //display the download link, as the user can download it now
             download_link.style.display='block';
+            //save the link (file path) so we will use it when we click on the link
             download_link.setAttribute('link', 'models/' + file); //create custom attribute.
+            //set the cursor
         });
         left_container.appendChild(modelDiv);
     });

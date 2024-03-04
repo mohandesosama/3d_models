@@ -69,6 +69,7 @@
         import { constructThumbsPanel, showProgressBar, createControlsButton } from './modules/main.js';
 
         const objViewer = document.getElementById('viewer');
+        //create a download link, hide it now as no object is viewed yet.
         const download_link=document.getElementById('download-link')
         download_link.innerText="Download this model"
         download_link.style.display='none';
@@ -98,7 +99,7 @@
             loadingModel = true;
 
             // Show progress bar
-            const progressBar = showProgressBar(objViewer);
+            const progressBar = showProgressBar();
 
             // Simulate delay with setTimeout (5 seconds in this example)
             // Load the OBJ file
