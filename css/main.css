@@ -55,6 +55,10 @@ nav a:hover {
 .paragraph_container {
     display: flex;
     align-items: flex-start; /* Align items to the start of the flex container */
+    margin-right: 80px; /*top right bottom left*/
+    margin-bottom: 20px;
+    /* Adjust based on nav height */
+  
 }
 
 .paragraph_label{

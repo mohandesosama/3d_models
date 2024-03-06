@@ -21,28 +21,40 @@
     </nav>
     <main>
         <div id="container">
-            
+
             <div class="paragraph_label">
                 The 3D Models Viewer
             </div>
             <div class="paragraph_container">
-            <div class="paragraph">
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. 
-                </p>
-                <p>
-                    It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
+                <div class="paragraph">
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                        type
+                        and scrambled it to make a type specimen book.
+                    </p>
+                    <p>
+                        It has survived not only five centuries, but also the
+                        leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
+                        1960s
+                        with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop
+                        publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                    <p>
+                        It has survived not only five centuries, but also the
+                        leap into electronic typesetting, remaining essentially unchanged. It was popularised in the
+                        1960s
+                        with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        desktop
+                        publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </div>
+                <div class="image_container">
+                    <img src="images/sample_image.png" alt="Your Image" class="image">
+                </div>
             </div>
-            <div class="image_container">
-                <img src="images/sample_image.png" alt="Your Image" class="image">
-            </div>
-        </div>
             <div id="models_browser">
 
                 <div id="left-container">
@@ -72,13 +84,13 @@
     <script type="module" src="modules/main.js"></script>
     <script type="module">
 
-        import { constructThumbsPanel, showProgressBar, createControlsButton } from './modules/main.js';
+        import { constructThumbsPanel, showProgressBar, createControlsButton } from './js/main.js';
 
         const objViewer = document.getElementById('viewer');
         //create a download link, hide it now as no object is viewed yet.
-        const download_link=document.getElementById('download-link')
-        download_link.innerText="Download this model"
-        download_link.style.display='none';
+        const download_link = document.getElementById('download-link')
+        download_link.innerText = "Download this model"
+        download_link.style.display = 'none';
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, objViewer.clientWidth / objViewer.clientHeight, 0.1, 1000);
@@ -179,7 +191,7 @@
                 });
         }
 
-      
+
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
         scene.add(ambientLight);
@@ -211,7 +223,7 @@
 
             // Add more filenames as needed
         ];
-        constructThumbsPanel(data, thum_container,controls,loadModel);
+        constructThumbsPanel(data, thum_container, controls, loadModel);
 
         objViewer.appendChild(renderer.domElement);
 
@@ -220,7 +232,7 @@
             camera.aspect = objViewer.clientWidth / objViewer.clientHeight;
             camera.updateProjectionMatrix();
         });
-       
+
         //createControlsButton(controls);
 
         function animate() {
