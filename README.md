@@ -7,6 +7,7 @@ The site contains a folder with the obj models. I used javascript to load those 
 ### Security
 * Content Security Policy (CSP): Implement CSP to define a whitelist of trusted sources for scripts, stylesheets, and other resources, mitigating the risks of cross-site scripting (XSS) attacks.
 I separated the html script from javascript files. Then I added some tursted sources for scripting such as three.js site as I need those scripts for my model viewer. Here is the code for ensuring CSP
+
 ```html
  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
     script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
@@ -17,6 +18,8 @@ I separated the html script from javascript files. Then I added some tursted sou
 ```javascript
 <script>alert('Hello, world!');</script>
 ```
+* Error handling: Implement error handling in my JavaScript code to handle unexpected errors. 
+
 ### Sync problem in model loading.
 The model takes an essential time to load especially with extensive mesh. The site has the ability to load multiple models. With many thumb images, one image for each model, you can click on the model thumb image to load it in the display area. User can click quickly and swap between models. The user can be fast enough so the current loading of the model is interrupted by a new loading of another model resulting in partially loading parts of each model !!
 The scenario happens becasue apparently the browser gives the new model to a new thread, but becasue both of them are loading into the same displaly area, the problem happens. 
