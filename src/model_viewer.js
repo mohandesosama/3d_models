@@ -1,6 +1,6 @@
 var obj_viewer = document.getElementById('viewer');
 // Function to show progress bar
-export function showProgressBar() {
+function showProgressBar() {
     // Create a progress bar element
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-bar');
@@ -12,7 +12,7 @@ export function showProgressBar() {
     // Return reference to the progress bar element
     return progressBar;
 }
-export function createControlsButton(ctrls) {
+function createControlsButton(ctrls) {
     var button = document.getElementById('controlsButton');
 
     // If button is not created, create it
@@ -67,7 +67,7 @@ function setCursorAuto() {
     obj_viewer.style.cursor = 'auto';
 }
 //auto creation of the model files thumnails
-export function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunction) {
+function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunction) {
     const download_link = document.getElementById('download-link');
 
     // adding the model thumbnails
@@ -107,3 +107,4 @@ export function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunc
     });
 
 }
+export {showProgressBar,constructThumbsPanel}
