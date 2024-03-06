@@ -8,7 +8,8 @@ The site contains a folder with the obj models. I used javascript to load those 
 * Content Security Policy (CSP): Implement CSP to define a whitelist of trusted sources for scripts, stylesheets, and other resources, mitigating the risks of cross-site scripting (XSS) attacks.
 I separated the html script from javascript files. Then I added some tursted sources for scripting such as three.js site as I need those scripts for my model viewer. Here is the code for ensuring CSP
 ```html
- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
     style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com">
 ```
 * Cross-Origin Resource Sharing (CORS): the website is hotsed on github pages, CORS it's automatically configured by GitHub.
