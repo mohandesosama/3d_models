@@ -1,0 +1,25 @@
+/*home page printing css*/
+.paragraph{
+    color:black;
+    font-size: 12px;
+}
+#left-container{
+    display: none;
+}
+#detail-container{
+    display: none;
+}
+/*the design image should be printed in grayscale*/
+.image{
+    filter: grayscale(100%);
+}
+/* avoid breading the model into two peices, one part in each page */  
+#viewer {
+    border: none;
+    page-break-inside: avoid;
+}
+/*stop displaying the nav bar while printing*/
+nav{
+    display: none;
+}
+

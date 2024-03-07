@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>3D Model Viewer with Enhanced Detail</title>
+</head>
+
+<body>
+    <header>
+    </header>
+  
+    <main>
+        <div id="searchResults">
+        </div>
+    </main>
+    <script>
+        // Function to parse query parameters from URL
+        function getQueryParam(param) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get(param);
+        }
+
+        // Get the search query from the URL
+        const searchQuery = getQueryParam('q');
+
+        // Display the search query (optional)
+        const searchResultsDiv = document.getElementById('searchResults');
+        searchResultsDiv.innerHTML = `<p>Search results for: <strong>${searchQuery}</strong></p>`;
+
+        // Here you can perform additional logic based on the search query,
+        // such as fetching data from an API, processing the query, etc.
+        // For this example, I'll just display the search query.
+
+        // You can modify this code to fetch and display actual search results.
+    </script>
+</body>
+
+</html>
