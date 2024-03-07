@@ -1,5 +1,11 @@
 import { showProgressBar, constructThumbsPanel }  from './src/model_viewer.js'
 
+//add data to search query
+document.querySelector('.search-form').addEventListener('submit', function(event) {
+    var searchInput = document.getElementById('searchInput').value;
+    document.getElementById('searchQuery').value = searchInput;
+});
+
 const objViewer = document.getElementById('viewer');
 //create a download link, hide it now as no object is viewed yet.
 const download_link = document.getElementById('download-link')

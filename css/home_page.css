@@ -38,6 +38,30 @@ nav a:not(:last-child) {
 nav a:hover {
     text-decoration: underline;
 }
+.search-input {
+    background-color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 20px;
+    margin-right: 10px;
+    width: 200px;
+    font-size: 17px;
+}
+.search-button {
+    background-color: #05094a;
+    color: white;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.search-button:hover {
+    
+    border: 1px solid white;
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -187,27 +211,4 @@ footer {
 .search-form {
     display: flex;
     align-items: center;
-}
-.search-input {
-    background-color: #fff;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 20px;
-    margin-right: 10px;
-    width: 200px;
-    font-size: 17px;
-}
-.search-button {
-    background-color: #05094a;
-    color: white;
-    border: none;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-.search-button:hover {
-    
-    border: 1px solid white;
 }
