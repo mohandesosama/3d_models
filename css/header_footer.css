@@ -1,0 +1,72 @@
+nav {
+    background-color:  #05094a;
+    /*
+    background: linear-gradient(to bottom, rgba(5, 9, 74, 0.6), rgba(5, 9, 74, 1)); */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    box-shadow: rgba(47, 47, 107, 0.5) 10px 10px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure nav appears above other content */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 8px 8px;
+}
+
+nav a:not(:last-child) {
+    margin-right: 10px;
+    /* Add margin between menu items */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+.search-input {
+    background-color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 20px;
+    margin-right: 10px;
+    width: 200px;
+    font-size: 17px;
+}
+.search-button {
+    background-color: #05094a;
+    color: white;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.search-button:hover {
+    
+    border: 1px solid white;
+}
+footer {
+    background-color: #05094a;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+    height: 100px;
+}
+.search-form {
+    display: flex;
+    align-items: center;
+}

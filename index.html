@@ -3,39 +3,29 @@
 
 <head>
     <title>3D Model Viewer with Enhanced Detail</title>
+       <!-- 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
     script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
     style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com">
 
 
 
-    <!-- 
+ 
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 
         'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; 
         font-src 'self' https://fonts.gstatic.com">
     -->
-    <link href="css/home_page.css" rel="stylesheet">
+    <link href="css/header_footer.css" type="text/css" rel="stylesheet">
+    <link href="css/home_page.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/homep_printing.css" media="print">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
 </head>
 
 <body>
 
     <header>
-    </header>
 
-    <nav>
-        <a href="#">3D Models</a>
-        <a href="#">2D Sketches</a>
-        <a href="#">School Projects</a>
-        <a href="#">Freehand Drawings</a>
-        <a href="#">Hobbies</a>
-        <a href="#">Contacts</a>
-        <form class="search-form" action="pages/search_results.html" method="GET">
-            <input type="hidden" name="q" id="searchQuery">
-            <input type="text" class="search-input" id="searchInput" autocomplete="false" placeholder="Search...">
-            <button type="submit" class="search-button">Search</button>
-        </form>
-    </nav>
+    </header>
     <main>
         <div id="container">
 
@@ -89,13 +79,14 @@
         </div>
     </main>
     <footer>
-        &copy; 2024 Designed by: Osama Hosameldeen
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/OrbitControls.js" defer></script>
-    <script type="module" src="./home_page.js" defer></script>
+    </footer>
+    <script type="module" src="src/header_footer.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/OrbitControls.js"></script>
+    <script type="module" src="./home_page.js"></script>
 </body>
 
 </html>

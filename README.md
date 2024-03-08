@@ -5,7 +5,7 @@ The 3D model viewer is just a javascript website to display the models of my son
 The site contains a folder with the obj models. I used javascript to load those models to the site and then rendered those models using Three.js library. 
 ## Challenges
 ### Security
-* Content Security Policy (CSP): Implement CSP to define a whitelist of trusted sources for scripts, stylesheets, and other resources, mitigating the risks of cross-site scripting (XSS) attacks.
+* Content Security Policy (CSP): Implemented CSP to define a whitelist of trusted sources for scripts, stylesheets, and other resources, mitigating the risks of cross-site scripting (XSS) attacks.
 I separated the html script from javascript files. Then I added some tursted sources for scripting such as three.js site as I need those scripts for my model viewer. Here is the code for ensuring CSP
 
 ```html
