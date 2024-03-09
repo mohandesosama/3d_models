@@ -2,6 +2,15 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
+/*this is like initialization of each page*/
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 100px 80px 80px 80px; /*top right bottom left*/
+    /* Adjust based on nav height */
+    padding: 20px;
+}
 nav {
     background-color:  #05094a;
     /*
