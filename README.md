@@ -65,8 +65,8 @@ To solve this problem, I put the third function in the first level, then i separ
 
 ```
 In the above example, loadModel is the first level function, it was the third level before passing it a prameter throug the second level function constructThumbsPanel. 
-### Header footer
-I used handlebars to render the header and footer in all pages from two files, footer.html and header.html. You can use the following code in your project paying attention to the locations path of the css and html files 
+### Header and Footer rendering
+I used Handlebars to render the header and footer in all pages from two files, footer.html and header.html. You can use the following code in your project paying attention to the locations path of the css and html files 
 ```JavaScript
 // Function to fetch partials from HTML files
 function fetchPartial(url, callback) {

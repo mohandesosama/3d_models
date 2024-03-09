@@ -1,6 +1,42 @@
+/* Styling for the message input container */
+#messageContainer {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
 
-#searchResults
-{
-    border: 1px solid red;
-    height: 350px;
+/* Styling for the message input label */
+label {
+    display: block; /* Ensures each label is on its own line */
+    margin-bottom: 5px; /* Adjust margin as needed */
+    color: #333; /* Text color */
+}
+
+/* Styling for the message input */
+#message {
+    padding: 8px; /* Adjust padding as needed */
+    width: 300px; /* Adjust width as needed */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Styling for the send message button */
+#sendMessageBtn {
+    padding: 8px 16px; /* Adjust padding as needed */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Styling for the messages container */
+#messages {
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+/* Styling for individual messages */
+.message {
+    margin-bottom: 10px; /* Adjust margin as needed */
+    padding: 10px; /* Adjust padding as needed */
+    background-color: #f5f5f5; /* Message background color */
+    border-radius: 4px; /* Rounded corners */
 }
