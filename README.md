@@ -65,3 +65,66 @@ To solve this problem, I put the third function in the first level, then i separ
 
 ```
 In the above example, loadModel is the first level function, it was the third level before passing it a prameter throug the second level function constructThumbsPanel. 
+### Header footer
+I used handlebars to render the header and footer in all pages from two files, footer.html and header.html. You can use the following code in your project paying attention to the locations path of the css and html files 
+```JavaScript
+// Function to fetch partials from HTML files
+function fetchPartial(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(null, xhr.responseText);
+            } else {
+                callback(new Error('Failed to fetch partial: ' + xhr.status), null);
+            }
+        }
+    };
+    xhr.open('GET', url, true);
+    xhr.send();
+}
+
+// Function to render header, footer, and other content
+function renderPageContent() {
+    // Fetch header partial
+    fetchPartial('header.html', function(error, headerHtml) {
+        if (error) {
+            console.error('Error fetching header partial:', error);
+            return;
+        }
+        // Register header partial
+        Handlebars.registerPartial('header', headerHtml);
+
+        // Render header template
+        var headerTemplate = Handlebars.compile('<header>{{> header}}</header>');
+        document.querySelector('header').innerHTML = headerTemplate();
+
+        // Fetch footer partial
+        fetchPartial('footer.html', function(error, footerHtml) {
+            if (error) {
+                console.error('Error fetching footer partial:', error);
+                return;
+            }
+            // Register footer partial
+            Handlebars.registerPartial('footer', footerHtml);
+
+            // Render footer template
+            var footerTemplate = Handlebars.compile('<footer>{{> footer}}</footer>');
+            document.querySelector('footer').innerHTML = footerTemplate();
+        });
+    });
+    addCSS('css/header_footer.css');
+}
+// Function to add CSS style
+function addCSS(cssFile) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = cssFile;
+    document.head.appendChild(link);
+}
+
+// Render header, footer, and other content
+renderPageContent();
+
+```
