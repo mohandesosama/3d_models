@@ -13,11 +13,9 @@ function fetchPartial(url, callback) {
     xhr.open('GET', url, true);
     xhr.send();
 }
+
 // Function to render header, footer, and other content
 function renderPageContent() {
-    // Add Handlebars.js script tag, we need this script to handle header and footer. 
-    addScript('https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js');
-
     // Fetch header partial
     fetchPartial('header.html', function(error, headerHtml) {
         if (error) {
@@ -55,11 +53,6 @@ function addCSS(cssFile) {
     link.href = cssFile;
     document.head.appendChild(link);
 }
-// Function to add script tag
-function addScript(scriptSrc) {
-    var script = document.createElement('script');
-    script.src = scriptSrc;
-    document.head.appendChild(script);
-}
+
 // Render header, footer, and other content
 renderPageContent();
