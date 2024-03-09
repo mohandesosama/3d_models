@@ -1,12 +1,5 @@
-import { showProgressBar, constructThumbsPanel }  from './src/model_viewer.js'
+import { showProgressBar, constructThumbsPanel }  from './model_viewer.js'
  //handle the header and footers
-
-
-//add data to search query
-document.querySelector('.search-form').addEventListener('submit', function(event) {
-    var searchInput = document.getElementById('searchInput').value;
-    document.getElementById('searchQuery').value = searchInput;
-});
 
 
 const objViewer = document.getElementById('viewer');

@@ -1,30 +1,49 @@
-// Define partials
-var headerPartial = `
-<nav>
-    <a href="#">3D Models</a>
-    <a href="#">2D Sketches</a>
-    <a href="#">School Projects</a>
-    <a href="#">Freehand Drawings</a>
-    <a href="#">Hobbies</a>
-    <a href="#">Contacts</a>
-    <form class="search-form" action="pages/search_results.html" method="GET">
-        <input type="hidden" name="q" id="searchQuery">
-        <input type="text" class="search-input" id="searchInput" autocomplete="false" placeholder="Search...">
-        <button type="submit" class="search-button">Search</button>
-    </form>
-</nav>
-`;
-var footerPartial = `
-&copy; 2024 Designed by: Osama Hosameldeen 
-`;
+// Function to fetch partials from HTML files
+function fetchPartial(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(null, xhr.responseText);
+            } else {
+                callback(new Error('Failed to fetch partial: ' + xhr.status), null);
+            }
+        }
+    };
+    xhr.open('GET', url, true);
+    xhr.send();
+}
 
-// Register partials
-Handlebars.registerPartial('header', headerPartial);
-Handlebars.registerPartial('footer', footerPartial);
+// Function to render header, footer, and other content
+function renderPageContent() {
+    // Fetch header partial
+    fetchPartial('header.html', function(error, headerHtml) {
+        if (error) {
+            console.error('Error fetching header partial:', error);
+            return;
+        }
+        // Register header partial
+        Handlebars.registerPartial('header', headerHtml);
 
-// Render templates
-var headerTemplate = Handlebars.compile('<header>{{> header}}</header>');
-var footerTemplate = Handlebars.compile('<footer>{{> footer}}</footer>');
+        // Render header template
+        var headerTemplate = Handlebars.compile('<header>{{> header}}</header>');
+        document.querySelector('header').innerHTML = headerTemplate();
 
-document.querySelector('header').innerHTML = headerTemplate();
-document.querySelector('footer').innerHTML = footerTemplate();
+        // Fetch footer partial
+        fetchPartial('footer.html', function(error, footerHtml) {
+            if (error) {
+                console.error('Error fetching footer partial:', error);
+                return;
+            }
+            // Register footer partial
+            Handlebars.registerPartial('footer', footerHtml);
+
+            // Render footer template
+            var footerTemplate = Handlebars.compile('<footer>{{> footer}}</footer>');
+            document.querySelector('footer').innerHTML = footerTemplate();
+        });
+    });
+}
+
+// Render header, footer, and other content
+renderPageContent();

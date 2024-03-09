@@ -15,10 +15,10 @@
         'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; 
         font-src 'self' https://fonts.gstatic.com">
     -->
-    <link href="css/header_footer.css" type="text/css" rel="stylesheet">
     <link href="css/home_page.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/homep_printing.css" media="print">
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/header_footer.css">
+   
 </head>
 
 <body>
@@ -81,12 +81,14 @@
     <footer>
 
     </footer>
+    <!--Include the following two lines in each new html file you make-->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
     <script type="module" src="src/header_footer.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/OBJLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/OrbitControls.js"></script>
-    <script type="module" src="./home_page.js"></script>
+    <script type="module" src="src/home_page.js"></script>
 </body>
 
 </html>
