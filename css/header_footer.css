@@ -49,11 +49,11 @@ nav a:hover {
 footer {
     background-color: #05094a;
     color: #fff;
-    padding: 20px;
     text-align: center;
     font-size: 12px;
     font-weight: bold;
     width: 100%;
     height: 100px;
+    padding-top:10px;
 }
 

@@ -13,9 +13,11 @@ function fetchPartial(url, callback) {
     xhr.open('GET', url, true);
     xhr.send();
 }
-
 // Function to render header, footer, and other content
 function renderPageContent() {
+    // Add Handlebars.js script tag, we need this script to handle header and footer. 
+    addScript('https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js');
+
     // Fetch header partial
     fetchPartial('header.html', function(error, headerHtml) {
         if (error) {
@@ -43,7 +45,21 @@ function renderPageContent() {
             document.querySelector('footer').innerHTML = footerTemplate();
         });
     });
+    addCSS('css/header_footer.css');
 }
-
+// Function to add CSS style
+function addCSS(cssFile) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = cssFile;
+    document.head.appendChild(link);
+}
+// Function to add script tag
+function addScript(scriptSrc) {
+    var script = document.createElement('script');
+    script.src = scriptSrc;
+    document.head.appendChild(script);
+}
 // Render header, footer, and other content
 renderPageContent();
