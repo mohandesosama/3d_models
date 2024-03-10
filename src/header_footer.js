@@ -1,7 +1,7 @@
 // Function to fetch partials from HTML files
 function fetchPartial(url, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 callback(null, xhr.responseText);
@@ -17,7 +17,7 @@ function fetchPartial(url, callback) {
 // Function to render header, footer, and other content
 function renderPageContent() {
     // Fetch header partial
-    fetchPartial('header.html', function(error, headerHtml) {
+    fetchPartial('header.html', function (error, headerHtml) {
         if (error) {
             console.error('Error fetching header partial:', error);
             return;
@@ -30,7 +30,7 @@ function renderPageContent() {
         document.querySelector('header').innerHTML = headerTemplate();
 
         // Fetch footer partial
-        fetchPartial('footer.html', function(error, footerHtml) {
+        fetchPartial('footer.html', function (error, footerHtml) {
             if (error) {
                 console.error('Error fetching footer partial:', error);
                 return;
@@ -56,3 +56,5 @@ function addCSS(cssFile) {
 
 // Render header, footer, and other content
 renderPageContent();
+
+

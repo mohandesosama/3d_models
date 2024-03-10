@@ -15,17 +15,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export function sendMessage() {
-    const message = document.getElementById('message').value;
+
+// Function to send a message
+export function sendMessage(message) {
     addDoc(collection(db, 'messages'), {
         text: message
-    }).then(function (docRef) {
-        console.log("Message added with ID: ", docRef.id);
-    }).catch(function (error) {
-        console.error("Error adding message: ", error);
-    });
+    })
+        .then(function (docRef) {
+            console.log("Message added with ID: ", docRef.id);
+        })
+        .catch(function (error) {
+            console.error("Error adding message: ", error);
+        });
 }
 
+// Function to display messages
 export function displayMessages() {
     onSnapshot(collection(db, 'messages'), function (snapshot) {
         var messagesContainer = document.getElementById('messages');
@@ -38,3 +42,4 @@ export function displayMessages() {
         });
     });
 }
+
