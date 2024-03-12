@@ -45,6 +45,7 @@ function renderPageContent() {
     });
     addCSS('css/header_footer.css');
 }
+//instaead of adding a line at the beginning of each new page
 // Function to add CSS style
 function addCSS(cssFile) {
     var link = document.createElement('link');
