@@ -53,14 +53,19 @@
                 const isAuthenticated = await isUserAuthenticated();
 
                 if (isAuthenticated) {
+                    localStorage.setItem('uid', user.uid);
+                    localStorage.setItem('email',email)
                     // User authenticated, check if admin
                     const isAdmin = await isUserAdmin(user.uid);
                     if (isAdmin) {
                         console.log("User is admin");
                         // Redirect or show admin options in UI
+                        // Save user data to localStorage
+                        localStorage.setItem('isAdmin', true);
                     } else {
                         console.log("User is normal user");
-                        // Redirect or show regular options in UI
+                        // Redirect or show regular options in UI   
+                        localStorage.setItem('isAdmin', false);
                     }
                 } else {
                     // User authentication failed
