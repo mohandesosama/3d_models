@@ -36,10 +36,11 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
     <script type="module" src="src/header_footer.js" defer></script>
     <script type="module">
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import {isUserAuthenticated, isUserAdmin } from './src/login.js'
 
         const firebaseAuth = getAuth();
+
         // Handle login form submission
         document.getElementById("loginForm").addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -47,10 +48,10 @@
             const password = document.getElementById("password").value;
 
             try {
-                // Sign in user with email and password
-                await firebaseAuth.signInWithEmailAndPassword(email, password);
+                await signInWithEmailAndPassword(firebaseAuth, email, password);
                 const user = firebaseAuth.currentUser;
                 const isAuthenticated = await isUserAuthenticated();
+
                 if (isAuthenticated) {
                     // User authenticated, check if admin
                     const isAdmin = await isUserAdmin(user.uid);

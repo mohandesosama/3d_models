@@ -1,8 +1,8 @@
 // firebase_init.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
+import { getFirestore, collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBfHmWpkUUZC5VOWzFUSMp7I-K09Vs720U",
@@ -16,12 +16,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
+const firebaseAuth = getAuth();
 
 // Function to check if user is authenticated
 export function isUserAuthenticated() {
     return new Promise((resolve, reject) => {
-        auth.onAuthStateChanged((user) => {
+        firebaseAuth.onAuthStateChanged((user) => {
             resolve(!!user);
         });
     });
@@ -30,10 +30,11 @@ export function isUserAuthenticated() {
 // Function to check if user is an admin
 export function isUserAdmin(userId) {
     return new Promise((resolve, reject) => {
-        db.collection("users").doc(userId).get()
-            .then((doc) => {
-                if (doc.exists) {
-                    const userData = doc.data();
+        const userDocRef = doc(db, "users", userId);
+        getDoc(userDocRef)
+            .then((docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
                     const isAdmin = userData.isAdmin;
                     resolve(!!isAdmin);
                 } else {
