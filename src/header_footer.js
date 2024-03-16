@@ -16,20 +16,13 @@ function fetchPartial(url, callback) {
 
 // Function to render header, footer, and other content
 function renderPageContent() {
-    var current_path_header;
-    var current_path_footer;
-    if (indexPage())
-    {
-        current_path_header='pages/header.html';
-        current_path_footer="pages/footer.html"
-    }
-    else
-    {
-        current_path_header='header.html';
-        current_path_footer="footer.html"
-    }
+    //this part of the code is added becasue index page is put outside
+    //the page folder which contains all pages.
+    var header_page_path = indexPage() ? 'pages/header.html' : 'header.html';
+    var footer_page_path = indexPage() ? 'pages/footer.html' : 'footer.html';
+
     // Fetch header partial
-    fetchPartial(current_path_header, function (error, headerHtml) {
+    fetchPartial(header_page_path, function (error, headerHtml) {
         if (error) {
             console.error('Error fetching header partial:', error);
             return;
@@ -42,7 +35,7 @@ function renderPageContent() {
         document.querySelector('header').innerHTML = headerTemplate();
 
         // Fetch footer partial
-        fetchPartial(current_path_footer, function (error, footerHtml) {
+        fetchPartial(footer_page_path, function (error, footerHtml) {
             if (error) {
                 console.error('Error fetching footer partial:', error);
                 return;
@@ -55,25 +48,14 @@ function renderPageContent() {
             document.querySelector('footer').innerHTML = footerTemplate();
         });
     });
-    if(indexPage())
-    {
-        addCSS('css/header_footer.css');
-    }
-    else
-    {
-        addCSS('../css/header_footer.css');
-    }
+    //check if you are calling from the index page or other pages. 
+    indexPage() ? addCSS('css/header_footer.css') : addCSS('../css/header_footer.css');
 }
-function indexPage(){
+function indexPage() {
     // Get the path of the current URL
     var path = window.location.pathname;
 
-    // Check if the path ends with "index.html"
-    if (path.endsWith("index.html")) {
-        return true;
-    } else {
-        return false;
-    }
+    return path.endsWith("index.html") ? true:false;
 }
 
 //instaead of adding a line at the beginning of each new page
