@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
 
 </head>
 
@@ -34,10 +34,10 @@
 
     <!--Include the following two lines in each new html file you make-->
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
-    <script type="module" src="src/header_footer.js" defer></script>
+    <script type="module" src="../src/header_footer.js" defer></script>
     <script type="module">
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import {isUserAuthenticated, isUserAdmin } from './src/login.js'
+        import {isUserAuthenticated, isUserAdmin } from '../src/login.js'
 
         const firebaseAuth = getAuth();
 
