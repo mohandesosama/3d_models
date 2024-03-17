@@ -18,8 +18,8 @@ function fetchPartial(url, callback) {
 function renderPageContent() {
     //this part of the code is added because the index page is put outside
     //the page folder which contains all pages.
-    var header_page_path = isIndexPage() ? window.location.pathname+'pages/header.html' : window.location.pathname+'header.html';
-    var footer_page_path = isIndexPage() ? window.location.pathname+'pages/footer.html' : window.location.pathname+'footer.html';
+    var header_page_path = isIndexPage() ? window.location.pathname+'pages/header.html' : window.location.pathname;
+    var footer_page_path = isIndexPage() ? window.location.pathname+'pages/footer.html' : window.location.pathname;
 
     // Fetch header partial
     fetchPartial(header_page_path, function (error, headerHtml) {
