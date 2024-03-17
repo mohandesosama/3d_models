@@ -93,8 +93,10 @@ function isIndexPage() {
     // Get the path of the current URL
     var path = window.location.pathname;
 
-    return path.endsWith("index.html") ? true : false;
+    // Check if the path corresponds to the root directory
+    return path === '/' || path === '/index.html';
 }
+
 
 //instaead of adding a line at the beginning of each new page
 // Function to add CSS style
