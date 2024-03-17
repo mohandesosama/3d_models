@@ -31,13 +31,23 @@
         //https://chat.openai.com/share/fe3bc44d-5a77-4872-a12c-63fbad985715
         import { sendMessage, displayMessages } from "../src/contact_me.js";
 
-        // Call function to display messages from Firestore
-        displayMessages();
+        // Retrieve the isAdmin item from localStorage
+        const isAdmin_str = localStorage.getItem('isAdmin');
 
-        // Add event listener to the send message button
-        document.getElementById("sendMessageBtn").addEventListener("click", function () {
-            sendMessage();
-        });
+        // Convert the retrieved value to a boolean
+        const isAdmin = isAdmin_str === 'true';
+
+        if (isAdmin) {
+            // Call function to display messages from Firestore
+            displayMessages();
+        }
+        else {
+
+            // Add event listener to the send message button
+            document.getElementById("sendMessageBtn").addEventListener("click", function () {
+                sendMessage();
+            });
+        }
     </script>
 
     <!--Include the following two lines in each new html file you make-->
