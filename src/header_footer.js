@@ -94,7 +94,7 @@ function isIndexPage() {
     var path = window.location.pathname;
     console.log(path)
     // Check if the path corresponds to the root directory
-    return path === '/' || path.endsWith("index.html");
+    return path === '/' || path.endsWith("index.html") || path.endsWith("3d_models/");
 }
 
 
