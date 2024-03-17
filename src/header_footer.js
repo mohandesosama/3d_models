@@ -92,7 +92,7 @@ function logout() {
 function isIndexPage() {
     // Get the path of the current URL
     var path = window.location.pathname;
-
+    console.log(path)
     // Check if the path corresponds to the root directory
     return path === '/' || path === '/index.html';
 }
