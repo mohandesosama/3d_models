@@ -18,8 +18,8 @@ function fetchPartial(url, callback) {
 function renderPageContent() {
     //this part of the code is added because the index page is put outside
     //the page folder which contains all pages.
-    var header_page_path = isIndexPage() ? window.location.pathname+'pages/header.html' : window.location.pathname;
-    var footer_page_path = isIndexPage() ? window.location.pathname+'pages/footer.html' : window.location.pathname;
+    var header_page_path = isIndexPage() ? './pages/header.html' : './header.html';
+    var footer_page_path = isIndexPage() ? './pages/footer.html' : './header.html';
 
     // Fetch header partial
     fetchPartial(header_page_path, function (error, headerHtml) {
@@ -49,10 +49,10 @@ function renderPageContent() {
 
             // After rendering header and footer, render the user content
             renderUserContent();
+            //check if you are calling from the index page or other pages. 
+            isIndexPage() ? addCSS('css/header_footer.css') : addCSS('../css/header_footer.css');
         });
     });
-    //check if you are calling from the index page or other pages. 
-    isIndexPage() ? addCSS('css/header_footer.css') : addCSS('../css/header_footer.css');
 }
 
 // Function to render user content
@@ -61,14 +61,12 @@ function renderUserContent() {
     const userElement = document.getElementById("user_email");
     const loginLink = document.getElementById("loginLink");
 
-    console.log(user_email);
-
     if (userElement) {
         if (user_email === "" || user_email === null) {
             userElement.innerText = "Welcome guest";
             if (loginLink) {
                 loginLink.innerText = "Login";
-                loginLink.href = window.location.pathname+"pages/login.html"; // Set the href attribute to the login page
+                loginLink.href = "./pages/login.html"; // Set the href attribute to the login page
             }
         } else {
             userElement.innerText = user_email;
@@ -85,7 +83,7 @@ function renderUserContent() {
 // Logout function
 function logout() {
     localStorage.clear();
-    window.location.href = window.location.pathname + "index.html"; // Redirect to the main page
+    window.location.href = "./index.html"; // Redirect to the main page
 }
 
 
