@@ -18,8 +18,8 @@ function fetchPartial(url, callback) {
 function renderPageContent() {
     //this part of the code is added because the index page is put outside
     //the page folder which contains all pages.
-    var header_page_path = isIndexPage() ? './pages/header.html' : './header.html';
-    var footer_page_path = isIndexPage() ? './pages/footer.html' : './header.html';
+    var header_page_path = './pages/header.html' ;
+    var footer_page_path =  './pages/footer.html' ;
 
     // Fetch header partial
     fetchPartial(header_page_path, function (error, headerHtml) {
@@ -50,7 +50,7 @@ function renderPageContent() {
             // After rendering header and footer, render the user content
             renderUserContent();
             //check if you are calling from the index page or other pages. 
-            isIndexPage() ? addCSS('css/header_footer.css') : addCSS('../css/header_footer.css');
+            addCSS('css/header_footer.css');
         });
     });
 }
@@ -66,7 +66,7 @@ function renderUserContent() {
             userElement.innerText = "Welcome guest";
             if (loginLink) {
                 loginLink.innerText = "Login";
-                loginLink.href = "./pages/login.html"; // Set the href attribute to the login page
+                loginLink.href = "./login.html"; // Set the href attribute to the login page
             }
         } else {
             userElement.innerText = user_email;
@@ -85,7 +85,7 @@ function logout() {
     localStorage.clear();
     window.location.href = "./index.html"; // Redirect to the main page
 }
-
+/*
 
 function isIndexPage() {
     // Get the path of the current URL
@@ -94,7 +94,7 @@ function isIndexPage() {
     // Check if the path corresponds to the root directory
     return path === '/' || path.endsWith("index.html") || path.endsWith("3d_models/");
 }
-
+*/
 
 //instaead of adding a line at the beginning of each new page
 // Function to add CSS style
