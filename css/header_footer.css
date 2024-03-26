@@ -1,4 +1,20 @@
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /*min-height: 100vh; */
+}
+/*this is like initialization of each page*/
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 100px 80px 80px 80px; /*top right bottom left*/
+    /* Adjust based on nav height */
+    padding: 20px;
+    min-height: calc(100vh - 340px); /* 340px is the hight of both header and footer, if you changed by adding more content, you have to increase this value here */
+}
+
 nav {
     background-color:  #05094a;
     /*

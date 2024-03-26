@@ -1,18 +1,4 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    /*min-height: 100vh; */
-}
-/*this is like initialization of each page*/
-#container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 100px 80px 80px 80px; /*top right bottom left*/
-    /* Adjust based on nav height */
-    padding: 20px;
-    min-height: calc(100vh - 340px); /* Minimum height of the viewport */
-}
+
 /* Styling for the message input container */
 #messageContainer {
     margin-bottom: 20px; /* Adjust margin as needed */
