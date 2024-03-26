@@ -17,8 +17,16 @@
     <main>
         <div id="container">
             <form id="loginForm">
-                <input type="email" id="email" placeholder="Email">
-                <input type="password" id="password" placeholder="Password">
+                <h2>Login to admin pannel</h2>
+
+                <div class="form-group">
+                    <label for="email">Username&nbsp;&nbsp;</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password&nbsp;&nbsp;&nbsp;</label>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
                 <button type="submit">Login</button>
             </form>
         </div>
@@ -37,7 +45,7 @@
     <script type="module" src="src/header_footer.js"></script>
     <script type="module">
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import {isUserAuthenticated, isUserAdmin } from '../src/login.js'
+        import { isUserAuthenticated, isUserAdmin } from '../src/login.js'
 
         const firebaseAuth = getAuth();
 
@@ -54,7 +62,7 @@
 
                 if (isAuthenticated) {
                     localStorage.setItem('uid', user.uid);
-                    localStorage.setItem('email',email)
+                    localStorage.setItem('email', email)
                     // User authenticated, check if admin
                     const isAdmin = await isUserAdmin(user.uid);
                     if (isAdmin) {
@@ -67,7 +75,7 @@
                         // Redirect or show regular options in UI   
                         localStorage.setItem('isAdmin', false);
                     }
-                    window.location.href="../index.html"
+                    window.location.href = "../index.html"
                 } else {
                     // User authentication failed
                     console.error("User authentication failed");

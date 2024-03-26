@@ -2,8 +2,11 @@
 /* Style for the login form container */
 #loginForm {
     width: 300px; /* Adjust width as needed */
-    margin: 0 auto; /* Center the form horizontally */
-    
+    margin: auto; /* Center the form horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 /* Style for the input fields */
@@ -34,6 +37,13 @@ button[type="submit"] {
 /* Style for the form labels */
 label {
     font-size: 17px; /* Font size */
+}
+.form-group{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 /* Align the submit button at the bottom */
