@@ -78,15 +78,16 @@ function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunction) {
         modelDiv.id = 'models/' + file;
         modelDiv.classList.add('model-img-div');
         //for the image inside the div, we shall click on it
-        const imageSrc = 'models/' + file.replace('.obj','.png');
+        //the name of the model is the same name of the image except the extension .png and .jpg
+        const imageSrc = 'images/' + file.replace('.obj','.png');
         const img = document.createElement('img');
         img.src=imageSrc;
         img.alt="Model thumbnail";
         img.classList.add("model-img");
         modelDiv.appendChild(img);
 
-        modelDiv.addEventListener('click', function () {
-            loadFunction(this, 'models/' + file);
+        img.addEventListener('click', function () {
+            loadFunction(modelDiv, 'models/' + file);
             createControlsButton(ctrls);
             //display the download link, as the user can download it now
             download_link.style.display = 'block';
