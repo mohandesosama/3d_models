@@ -73,10 +73,18 @@ function constructThumbsPanel(modelFiles, left_container, ctrls, loadFunction) {
     // adding the model thumbnails
     modelFiles.forEach(function (file) {
         const modelDiv = document.createElement('div');
-        modelDiv.textContent = "Click to view the model";
+        //modelDiv.textContent = "Click to view the model";
         // if i want to view specific model from the list of model, id of it showld be defined.
         modelDiv.id = 'models/' + file;
-        modelDiv.classList.add('model-img');
+        modelDiv.classList.add('model-img-div');
+        //for the image inside the div, we shall click on it
+        const imageSrc = 'models/' + file.replace('.obj','.png');
+        const img = document.createElement('img');
+        img.src=imageSrc;
+        img.alt="Model thumbnail";
+        img.classList.add("model-img");
+        modelDiv.appendChild(img);
+
         modelDiv.addEventListener('click', function () {
             loadFunction(this, 'models/' + file);
             createControlsButton(ctrls);

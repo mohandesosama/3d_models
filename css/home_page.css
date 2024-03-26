@@ -70,13 +70,19 @@
     
 
 }
-.model-img {
+.model-img-div{
     flex: 1;
     border-bottom: 1px solid #f00;
     height: 130px;
    
     
 }
+.model-img{
+    width: 100%; /* Make the image width 100% of the parent div */
+    height: 100%; /* Make the image height 100% of the parent div */
+    object-fit: cover; /* Scale the image to cover the entire container while preserving aspect ratio */  
+}
+
 #viewer {
     width: 100%;
     position: relative;
