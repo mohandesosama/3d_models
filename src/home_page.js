@@ -15,6 +15,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(objViewer.clientWidth, objViewer.clientHeight); // Use viewer div width and height
 renderer.setClearColor("#e5e5e5"); // Set background color to white
 
+
 const thum_container = document.getElementById('left-container');
 
 // Variables to store the current model and its div container
@@ -75,7 +76,7 @@ function loadModel(div, modelPath) {
         currentModel = object;
 
         // Highlight the selected model div
-        const modelDivs = document.querySelectorAll('.model-img');
+        const modelDivs = document.querySelectorAll('.model-img-div');
         for (let i = 0; i < modelDivs.length; i++) {
             // i manually check the id
             if (modelDivs[i].id === currentDiv.id) {

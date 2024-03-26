@@ -75,6 +75,8 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .model-img{
     width:50%;
@@ -82,9 +84,10 @@
     object-fit: cover; /* Scale the image to cover the entire container while preserving aspect ratio */  
     transition: filter 0.3s;
 }
+
 .model-img:hover{
     cursor:pointer;
-    filter: grayscale(100%);
+    filter: grayscale(90%);
 }
 
 #viewer {
