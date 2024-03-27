@@ -16,11 +16,14 @@
 
     <main>
         <div id="container">
-            <h1>Firebase Example</h1>
+            <h1>Contact Me</h1>
             <div id="messageContainer">
                 <label for="message">Enter Message:</label>
-                <input type="text" id="message">
-                <button id="sendMessageBtn">Send Message</button>
+                <textarea id="message" maxlength="200"></textarea>
+                <div id="button_charcount_group">
+                    <button id="sendMessageBtn">Send Message</button>
+                    <div id="char-count">0/200</div>
+                </div>
             </div>
             <div id="messages"></div>
         </div>

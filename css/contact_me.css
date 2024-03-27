@@ -2,6 +2,8 @@
 /* Styling for the message input container */
 #messageContainer {
     margin-bottom: 20px; /* Adjust margin as needed */
+    display:flex;
+    flex-direction: column;
 }
 
 /* Styling for the message input label */
@@ -14,19 +16,32 @@ label {
 /* Styling for the message input */
 #message {
     padding: 8px; /* Adjust padding as needed */
-    width: 300px; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
     border: 1px solid #ccc; /* Border color */
     border-radius: 4px; /* Rounded corners */
-}
+    height: 200px;
+    font-size: 17px;
+    caret-color: initial;
+    text-align: start;
+    resize: none;
 
+}
+#button_charcount_group{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
 /* Styling for the send message button */
 #sendMessageBtn {
     padding: 8px 16px; /* Adjust padding as needed */
-    background-color: #007bff; /* Button background color */
+    background-color: #05094a; /* Button background color */
     color: #fff; /* Button text color */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
+    font-size: 17px;
+    width:25%;
     cursor: pointer; /* Change cursor to pointer on hover */
+    margin-top: 10px;
 }
 
 /* Styling for the messages container */
