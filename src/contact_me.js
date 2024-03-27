@@ -42,4 +42,20 @@ export function displayMessages() {
         });
     });
 }
+const textarea=document.getElementById("message");
+const charcount=document.getElementById("char-count");
+textarea.addEventListener('input',function(){
+    const maxLength=parseInt(textarea.getAttribute("maxlength"));
+    const currentLength=textarea.value.length;
+    charcount.textContent=currentLength + " / " +maxLength;
+
+    if(currentLength >= maxLength)
+    {
+        charcount.style.color="red";
+        textarea.value=textarea.value.substring(0,maxLength);
+    }
+    else{
+        charcount.style.color="gray";
+    }
+});
 

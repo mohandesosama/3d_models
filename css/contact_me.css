@@ -49,6 +49,11 @@ label {
     margin-top: 20px; /* Adjust margin as needed */
 }
 
+#char-count {
+    font-size: 16px;
+    color: #666;
+}
+
 /* Styling for individual messages */
 .message {
     margin-bottom: 10px; /* Adjust margin as needed */
