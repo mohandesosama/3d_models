@@ -22,8 +22,10 @@
                 <textarea id="message" maxlength="200"></textarea>
                 <div id="button_charcount_group">
                     <button id="sendMessageBtn">Send Message</button>
+                    <div id="flashMessage" style="display: none; color: green;">Message sent successfully!</div>
                     <div id="char-count">0/200</div>
                 </div>
+
             </div>
             <div id="messages"></div>
         </div>
@@ -47,10 +49,14 @@
         }
         else {
 
+            const msgBtn=document.getElementById("sendMessageBtn");
+            const textArea=document.getElementById("message");
+
             // Add event listener to the send message button
-            document.getElementById("sendMessageBtn").addEventListener("click", function () {
-                sendMessage(document.getElementById("message").value);
+            msgBtn.addEventListener("click", function () {
+                sendMessage(textArea.value);
             });
+
         }
     </script>
 
