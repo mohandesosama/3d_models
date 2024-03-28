@@ -19,7 +19,7 @@
             <h1>Contact Me</h1>
             <div id="messageContainer">
                 <label for="message">Enter Message:</label>
-                <textarea id="message" maxlength="10"></textarea>
+                <textarea id="message" maxlength="200"></textarea>
                 <div id="button_charcount_group">
                     <button id="sendMessageBtn">Send Message</button>
                     <div id="char-count">0/200</div>
@@ -49,7 +49,7 @@
 
             // Add event listener to the send message button
             document.getElementById("sendMessageBtn").addEventListener("click", function () {
-                sendMessage();
+                sendMessage(document.getElementById("message").value);
             });
         }
     </script>

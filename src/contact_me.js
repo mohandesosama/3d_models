@@ -49,7 +49,7 @@ textarea.addEventListener('input',function(){
     const currentLength=textarea.value.length;
     charcount.textContent=currentLength + " / " +maxLength;
 
-    if(currentLength >= maxLength)
+    if(currentLength > maxLength)
     {
         charcount.style.color="red";
         textarea.value=textarea.value.substring(0,maxLength);
