@@ -1,7 +1,7 @@
 // firebase_init.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBfHmWpkUUZC5VOWzFUSMp7I-K09Vs720U",
@@ -21,48 +21,89 @@ export function sendMessage(message) {
     const msgBtn = document.getElementById("sendMessageBtn");
     const textArea = document.getElementById("message");
     const flashMessage = document.getElementById("flashMessage");
+    const charCount = document.getElementById("char-count");
+    const emailText = document.getElementById("email");
 
     msgBtn.disabled = true;
     textArea.disabled = true;
+    emailText.disabled = true;
     msgBtn.style.opacity = 0.5;
     textArea.style.opacity = 0.5;
+    emailText.style.opacity = 0.5;
 
     addDoc(collection(db, 'messages'), {
-        text: message
+        text: message,
+        email: emailText.value
     })
         .then(function (docRef) {
             console.log("Message added with ID: ", docRef.id);
             textArea.value = "";
+            emailText.value = "";
+            //reset the char counter
+            const text = charCount.textContent;
+            var index = text.indexOf('/');
+            if (index != -1)
+                charCount.textContent = '0 ' + text.substring(index);
             //this part for flash message
             flashMessage.style.display = 'block';
             setTimeout(function () {
+                //after 3 seconds, return everything to its previous state.
+                //hide the success message
                 flashMessage.style.display = 'none';
+                //deblurr the controls again.
+                msgBtn.disabled = false;
+                textArea.disabled = false;
+                emailText.disabled = false;
+                msgBtn.style.opacity = 1;
+                textArea.style.opacity = 1;
+                emailText.style.opacity = 1;
             }, 3000);
-           
+
         })
         .catch(function (error) {
             console.error("Error adding message: ", error);
         });
 
-    msgBtn.disabled = false;
-    textArea.disabled = false;
-    msgBtn.style.opacity = 1;
-    textArea.style.opacity = 1;
+
 
 }
 
 // Function to display messages
 export function displayMessages() {
     onSnapshot(collection(db, 'messages'), function (snapshot) {
-        var messagesContainer = document.getElementById('messages');
+        var messagesContainer = document.getElementById('messages-container');
         messagesContainer.innerHTML = '';
         snapshot.forEach(function (doc) {
+            var messageID = doc.id;
             var message = doc.data().text;
+            var email = doc.data().email;
             var messageElement = document.createElement('div');
-            messageElement.textContent = message;
+            messageElement.innerHTML = 'Email: ' + email + '<br><br>' + 'Message Body: ' + message + '<br><br>';
+            messageElement.classList.add("messages");
+
+            //delete button
+            var delButton = document.createElement('button');
+            delButton.textContent = 'Delete';
+            delButton.classList.add('del-button');
+            delButton.addEventListener('click', function () {
+                deleteMessage(messageID, messageElement);
+            });
+            messageElement.appendChild(delButton);
             messagesContainer.appendChild(messageElement);
         });
     });
+}
+function deleteMessage(messageID, messageElement) {
+
+    deleteDoc(doc(db, 'messages', messageID))
+        .then(() => {
+            console.log("message deleted successfully");
+            messageElement.remove;
+        })
+        .catch((error) => {
+            console.error("Error deleting message ", error);
+        });
+
 }
 
 //this part for character count

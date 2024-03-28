@@ -14,7 +14,8 @@ input[type="email"],
 input[type="password"] {
     width: 100%; /* Take up full width */
     padding: 10px; /* Adjust padding as needed */
-    margin-bottom: 10px; /* Spacing between input fields */
+    margin-bottom: 20px; /* Spacing between input fields */
+    margin-top: 10px;
     border: 1px solid #05094a; /* Border color */
     border-radius: 5px; /* Rounded corners */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
@@ -38,13 +39,7 @@ button[type="submit"] {
 label {
     font-size: 17px; /* Font size */
 }
-.form-group{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+
 
 /* Align the submit button at the bottom */
 button[type="submit"] {

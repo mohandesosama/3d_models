@@ -24,7 +24,16 @@ label {
     caret-color: initial;
     text-align: start;
     resize: none;
-
+    margin-top: 5px;
+}
+#email{
+    font-size:17px;
+    width:33%;
+    padding:8px;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    margin-top:5px;
+    margin-bottom: 20px;
 }
 #button_charcount_group{
     display: flex;
@@ -45,19 +54,28 @@ label {
 }
 
 /* Styling for the messages container */
-#messages {
+#messages-container {
     margin-top: 20px; /* Adjust margin as needed */
+}
+
+.messages{
+    border: 1px solid green;
+    padding: 7px;
+    font-size: 17px;
+    margin: 5px;
 }
 
 #char-count {
     font-size: 16px;
     color: #666;
 }
-
-/* Styling for individual messages */
-.message {
-    margin-bottom: 10px; /* Adjust margin as needed */
-    padding: 10px; /* Adjust padding as needed */
-    background-color: #f5f5f5; /* Message background color */
+.del-button{
+    padding: 8px 16px; /* Adjust padding as needed */
+    background-color: #05094a; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
+    font-size: 17px;
+    width:10%;
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
