@@ -5,6 +5,7 @@
     <title>3D Model Viewer with Enhanced Detail</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link rel="stylesheet" type="text/css" href="../css/contact_me.css">
 
@@ -22,12 +23,13 @@
                 <input type="email" id="email" placeholder="Enter your email">
                 <label for="message">Enter Message:<span style="color:red">*</span></label>
                 <textarea id="message" maxlength="1000" placeholder="Enter your message here"></textarea>
+                <div class="g-recaptcha" data-sitekey="6LdnEKkpAAAAAKyS9EcUG9akQnIa_scwmyDEH8Ok"></div>
                 <div id="button_charcount_group">
                     <button id="sendMessageBtn">Send Message</button>
                     <div id="flashMessage" style="display: none; color: green;">Message sent successfully!</div>
                     <div id="char-count">0/1000</div>
                 </div>
-
+                
             </div>
             <div id="messages-container"></div>
         </div>
@@ -59,6 +61,11 @@
 
             // Add event listener to the send message button
             msgBtn.addEventListener("click", function () {
+                var response = grecaptcha.getResponse();
+                if (response.length == 0) {
+                    alert("Please complete the CAPTCHA.");
+                    return;
+                }
                 if(textArea.value.length > 0 && emailText.value.length > 0 && 
                 validateEmail(emailText.value)) 
                     sendMessage(textArea.value);
