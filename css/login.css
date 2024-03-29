@@ -4,7 +4,7 @@
     width: 300px; /* Adjust width as needed */
     margin: auto; /* Center the form horizontally */
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     flex-direction: column;
 }
