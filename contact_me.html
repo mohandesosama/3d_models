@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/contact_me.css">
 
@@ -21,6 +22,8 @@
             <div id="messageContainer">
                 <label for="email">Email:<span style="color:red">*</span></label>
                 <input type="email" id="email" placeholder="Enter your email">
+                <label for="uname">Your Name:<span style="color:red;">*</span></label>
+                <input type="input" id="uname" placeholder="Enter your name">
                 <label for="message">Enter Message:<span style="color:red">*</span></label>
                 <textarea id="message" maxlength="1000" placeholder="Enter your message here"></textarea>
                 <div class="g-recaptcha" data-sitekey="6LdnEKkpAAAAAKyS9EcUG9akQnIa_scwmyDEH8Ok"></div>
@@ -29,7 +32,7 @@
                     <div id="flashMessage" style="display: none; color: green;">Message sent successfully!</div>
                     <div id="char-count">0/1000</div>
                 </div>
-                
+
             </div>
             <div id="messages-container"></div>
         </div>
@@ -49,15 +52,16 @@
 
         if (isAdmin) {
             //hide message sending, admin don't need it
-            document.getElementById("messageContainer").style.display='none';
+            document.getElementById("messageContainer").style.display = 'none';
             // Call function to display messages from Firestore
             displayMessages();
         }
         else {
-            document.getElementById("messageContainer").style.display='block';
-            const msgBtn=document.getElementById("sendMessageBtn");
-            const textArea=document.getElementById("message");
-            const emailText=document.getElementById("email");
+            document.getElementById("messageContainer").style.display = 'block';
+            const msgBtn = document.getElementById("sendMessageBtn");
+            const textArea = document.getElementById("message");
+            const uname = document.getElementById("uname");
+            const emailText = document.getElementById("email");
 
             // Add event listener to the send message button
             msgBtn.addEventListener("click", function () {
@@ -66,15 +70,18 @@
                     alert("Please complete the CAPTCHA.");
                     return;
                 }
-                if(textArea.value.length > 0 && emailText.value.length > 0 && 
-                validateEmail(emailText.value)) 
-                    sendMessage(textArea.value);
-                else{
+                if (textArea.value.length > 0 && emailText.value.length > 0 && uname.value.length > 0 &&
+                    validateEmail(emailText.value)) {
+                    sendMessage(textArea.value, uname.value, emailText.value);
+                    //sendEmail(textArea.value, uname.value, emailText.value);
+                }
+                else {
                     alert("Make sure you filled all fields and entered valid email");
                 }
             });
 
         }
+
         function validateEmail(email) {
             var re = /\S+@\S+\.\S+/;
             return re.test(email);

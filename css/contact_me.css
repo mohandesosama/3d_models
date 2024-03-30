@@ -35,6 +35,16 @@ label {
     margin-top:5px;
     margin-bottom: 20px;
 }
+#uname{
+    font-size: 17px;
+    width:33%;
+    padding:8px;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    margin-top:5px;
+    margin-bottom: 20px;
+
+}
 #button_charcount_group{
     display: flex;
     flex-direction: row;

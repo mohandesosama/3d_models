@@ -17,28 +17,26 @@ const db = getFirestore(app);
 
 
 // Function to send a message
-export function sendMessage(message) {
-    const msgBtn = document.getElementById("sendMessageBtn");
-    const textArea = document.getElementById("message");
+export function sendMessage(message,uname, email) {
+    const msgContainer = document.getElementById("messageContainer");
+
     const flashMessage = document.getElementById("flashMessage");
     const charCount = document.getElementById("char-count");
-    const emailText = document.getElementById("email");
+    
 
-    msgBtn.disabled = true;
-    textArea.disabled = true;
-    emailText.disabled = true;
-    msgBtn.style.opacity = 0.5;
-    textArea.style.opacity = 0.5;
-    emailText.style.opacity = 0.5;
+    msgContainer.disabled=true;
+    msgContainer.opacity=0.5;
 
     addDoc(collection(db, 'messages'), {
         text: message,
-        email: emailText.value
+        sender_name: uname,
+        email: email
     })
         .then(function (docRef) {
             console.log("Message added with ID: ", docRef.id);
-            textArea.value = "";
-            emailText.value = "";
+            document.getElementById("message").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("uname").value = "";
             //reset the char counter
             const text = charCount.textContent;
             var index = text.indexOf('/');
@@ -51,12 +49,8 @@ export function sendMessage(message) {
                 //hide the success message
                 flashMessage.style.display = 'none';
                 //deblurr the controls again.
-                msgBtn.disabled = false;
-                textArea.disabled = false;
-                emailText.disabled = false;
-                msgBtn.style.opacity = 1;
-                textArea.style.opacity = 1;
-                emailText.style.opacity = 1;
+                msgContainer.disabled=false;
+                msgContainer.opacity=1;
             }, 3000);
 
         })
@@ -114,7 +108,7 @@ textarea.addEventListener('input', function () {
     const currentLength = textarea.value.length;
     charcount.textContent = currentLength + " / " + maxLength;
 
-    if (currentLength > maxLength) {
+    if (currentLength >= maxLength) {
         charcount.style.color = "red";
         textarea.value = textarea.value.substring(0, maxLength);
     }
