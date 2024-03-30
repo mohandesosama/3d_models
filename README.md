@@ -1,7 +1,9 @@
 # 3D Model Viewer
 ## Introduction 
 The 3D model viewer is just a javascript website to display the models of my son. My son Mohammed Osama created lots of 3D models using Fusion 360. He asked me to create a website for him to show up his works. I used Three.js library to load the models and show them on the html site. I mainly used javascript didn't use JQuery as the site is very simple. 
+
 ![main_page](temp_images/login.png)
+
 ## How it is implemented
 The site contains a folder with the obj models. I used javascript to load those models to the site and then rendered those models using Three.js library. 
 ## Challenges
